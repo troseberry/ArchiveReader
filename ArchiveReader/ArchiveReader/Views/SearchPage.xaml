@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArchiveReader.Views.SearchPage"
+             xmlns:vm="clr-namespace:ArchiveReader.ViewModels"
+             xmlns:local ="clr-namespace:ArchiveReader.DataTemplates"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:SearchViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar x:Name="searchBar" 
+                       Placeholder="Search tag..." 
+                       PlaceholderColor ="#ededed"
+                       TextColor="#ededed"
+                       Margin="0" />
+            <Label x:Name="resultsLabel"/>
+            <ListView x:Name="resultsListView"  HasUnevenRows="true"
+                      ItemSelected="ResultsListView_ItemSelected"
+                      ItemTapped="ResultsListView_ItemTapped" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <local:WorkDataTemplate/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

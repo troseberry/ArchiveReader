@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArchiveReader.DataTemplates.WorkDataTemplate">
+
+    <ViewCell.View>
+        <StackLayout Orientation="Vertical" Padding="20" HeightRequest="125" >
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding title}" FontAttributes="Bold" FontSize="18" LineBreakMode="TailTruncation" MaxLines="2"/>
+                <Label Text="{Binding lastUpdated}" HorizontalOptions="EndAndExpand" LineBreakMode="NoWrap" MinimumWidthRequest="75" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal" Margin="0, -10, 0, 0" >
+                <Label Text="by"/>
+                <Label Text="{Binding author}" LineBreakMode="TailTruncation" MaxLines="1" />
+            </StackLayout>
+
+            <Label Text="{Binding fandoms}" LineBreakMode="TailTruncation" MaxLines="1"/>
+            <Label Text="{Binding summary}" LineBreakMode="TailTruncation" MaxLines="3"/>
+
+
+            <Label Text="{Binding AllStats}" LineBreakMode="WordWrap" MaxLines="2"/>
+        </StackLayout>
+    </ViewCell.View>
+</ViewCell>

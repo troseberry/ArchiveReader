@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArchiveReader.Views.LibraryPage"
+             xmlns:vm="clr-namespace:ArchiveReader.ViewModels"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:LibraryViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Margin="20" Text="Resume Reading" HeightRequest="150" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
