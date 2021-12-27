@@ -4,22 +4,30 @@
              x:Class="ArchiveReader.DataTemplates.WorkDataTemplate">
 
     <ViewCell.View>
-        <StackLayout Orientation="Vertical" Padding="20" HeightRequest="125" >
+        <StackLayout Orientation="Vertical" Padding="20" >
+            <Label Text="{Binding lastUpdated}" LineBreakMode="NoWrap" MinimumWidthRequest="85" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+
             <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding title}" FontAttributes="Bold" FontSize="18" LineBreakMode="TailTruncation" MaxLines="2"/>
-                <Label Text="{Binding lastUpdated}" HorizontalOptions="EndAndExpand" LineBreakMode="NoWrap" MinimumWidthRequest="75" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
-            </StackLayout>
-            
-            <StackLayout Orientation="Horizontal" Margin="0, -10, 0, 0" >
-                <Label Text="by"/>
-                <Label Text="{Binding author}" LineBreakMode="TailTruncation" MaxLines="1" />
+                <Grid VerticalOptions="Center" ColumnSpacing="0" RowSpacing="0" HeightRequest="55" WidthRequest="55" >
+                    <Image Grid.Row="0" Grid.Column="0" Source="{Binding RequiredTagsArray[0]}" />
+                    <Image Grid.Row="1" Grid.Column="0" Source="{Binding RequiredTagsArray[1]}" />
+                    <Image Grid.Row="0" Grid.Column="1" Source="{Binding RequiredTagsArray[2]}" />
+                    <Image Grid.Row="1" Grid.Column="1" Source="{Binding RequiredTagsArray[3]}" />
+                </Grid>
+
+                <StackLayout>
+                    <Label Text="{Binding title}" FontAttributes="Bold" FontSize="18" LineBreakMode="TailTruncation" MaxLines="2"/>
+
+                    <StackLayout Orientation="Horizontal" Margin="0, -10, 0, 0" >
+                        <Label Text="by"/>
+                        <Label Text="{Binding author}" LineBreakMode="TailTruncation" MaxLines="1" />
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
 
             <Label Text="{Binding fandoms}" LineBreakMode="TailTruncation" MaxLines="1"/>
             <Label Text="{Binding summary}" LineBreakMode="TailTruncation" MaxLines="3"/>
-
-
-            <Label Text="{Binding AllStats}" LineBreakMode="WordWrap" MaxLines="2"/>
+            <Label Text="{Binding AllStats}" LineBreakMode="WordWrap" MaxLines="3" HorizontalTextAlignment="End"/>
         </StackLayout>
     </ViewCell.View>
 </ViewCell>

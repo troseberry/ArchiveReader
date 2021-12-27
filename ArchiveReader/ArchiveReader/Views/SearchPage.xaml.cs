@@ -11,6 +11,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using ArchiveReader.Models;
+using System.Diagnostics;
 
 namespace ArchiveReader.Views
 {
@@ -40,6 +41,8 @@ namespace ArchiveReader.Views
             apiFunctionPath = "https://ao3api.netlify.app/.netlify/functions/GetAllFanficsOnPage?tagName=" + searchBar.Text;
             //resultsLabel.Text = searchBar.Text;
             RunAPICall();
+
+            Debug.WriteLine("Execute search");
         }
 
         private async void RunAPICall()
@@ -51,11 +54,10 @@ namespace ArchiveReader.Views
                 {
                     resultString = await response.Content.ReadAsStringAsync();
                     List<Work> outputWork = JsonSerializer.Deserialize<List<Work>>(resultString);
-                    //foreach(Work w in outputWork)
-                    //{
-                    //    resultsLabel.Text += w.ToString();
-                    //    resultsLabel.Text += "\n";
-                    //}
+                    foreach(Work w in outputWork)
+                    {
+                        w.GenerateExtraInfo();
+                    }
 
                     resultsListView.ItemsSource = outputWork;
                 }

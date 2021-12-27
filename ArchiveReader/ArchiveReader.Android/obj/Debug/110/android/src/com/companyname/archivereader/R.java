@@ -6524,10 +6524,26 @@ public final class R {
     public static final int notification_template_icon_low_bg=0x7f07008c;
     public static final int notification_tile_bg=0x7f07008d;
     public static final int notify_panel_notification_icon_bg=0x7f07008e;
-    public static final int test_custom_background=0x7f07008f;
-    public static final int tooltip_frame_dark=0x7f070090;
-    public static final int tooltip_frame_light=0x7f070091;
-    public static final int xamarin_logo=0x7f070092;
+    public static final int requiredtag_none=0x7f07008f;
+    public static final int requiredtag_pairing_ff=0x7f070090;
+    public static final int requiredtag_pairing_fm=0x7f070091;
+    public static final int requiredtag_pairing_gen=0x7f070092;
+    public static final int requiredtag_pairing_mm=0x7f070093;
+    public static final int requiredtag_pairing_multi=0x7f070094;
+    public static final int requiredtag_pairing_other=0x7f070095;
+    public static final int requiredtag_progress_complete=0x7f070096;
+    public static final int requiredtag_progress_incomplete=0x7f070097;
+    public static final int requiredtag_rating_explicit=0x7f070098;
+    public static final int requiredtag_rating_general=0x7f070099;
+    public static final int requiredtag_rating_mature=0x7f07009a;
+    public static final int requiredtag_rating_teen=0x7f07009b;
+    public static final int requiredtag_warning_authorchosenot=0x7f07009c;
+    public static final int requiredtag_warning_externalwork=0x7f07009d;
+    public static final int requiredtag_warning_oneormore=0x7f07009e;
+    public static final int test_custom_background=0x7f07009f;
+    public static final int tooltip_frame_dark=0x7f0700a0;
+    public static final int tooltip_frame_light=0x7f0700a1;
+    public static final int xamarin_logo=0x7f0700a2;
   }
   public static final class id {
     public static final int ALT=0x7f080000;

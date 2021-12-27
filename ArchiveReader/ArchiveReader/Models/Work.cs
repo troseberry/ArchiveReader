@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using System.Diagnostics;
 
 namespace ArchiveReader.Models
 {
@@ -36,6 +38,12 @@ namespace ArchiveReader.Models
         
          public Work()
         {
+            
+        }
+
+        public void GenerateExtraInfo()
+        {
+            #region Stats
             if (!string.IsNullOrWhiteSpace(language))
             {
                 AllStats += $"Language: {language}";
@@ -75,9 +83,93 @@ namespace ArchiveReader.Models
             {
                 AllStats += $" Hits: {hits}";
             }
+            #endregion
+
+            //[Teen And Up Audiences], [Choose Not To Use Archive Warnings], [Multi], [Work in Progress]"
+            #region Required Tags
+            RequiredTagsArray = new string[4];
+
+            string[] reqStrings = requiredTags.Split('[');
+            reqStrings = reqStrings.Skip(1).ToArray();
+
+            for (int i = 0; i < reqStrings.Length; i++)
+            {
+                string result = reqStrings[i];
+                if (result.Contains("],"))
+                {
+                    result = result.Replace("],", "");
+                }
+                else
+                {
+                    result = result.Replace("]", "");
+                }
+
+                result = result.Trim();
+                RequiredTagsArray[i] = GetReqTagImageForString(result, i);
+                //string e = GetReqTagImageForString(result, i);
+                //Debug.WriteLine(e);
+            }
+            #endregion
         }
 
+        string GetReqTagImageForString(string tagStr, int index)
+        {
+            if (index == 1 & !tagStr.Equals("No Archive Warnings Apply"))
+            {
+                return "RequiredTag_Warning_OneOrMore.png";
+            }
 
+            if (index == 2 & tagStr.Contains(","))
+            {
+                return "RequiredTag_Pairing_Multi.png";
+            }
+
+            
+
+            switch(tagStr)
+            {
+                case "No category":
+                    return "RequiredTag_None.png";
+
+                case "General Audiences":
+                    return "RequiredTag_Rating_General.png";
+                case "Teen And Up Audiences":
+                    return "RequiredTag_Rating_Teen.png";
+                case "Mature":
+                    return "RequiredTag_Rating_Mature.png";
+                case "Explicit":
+                    return "RequiredTag_Rating_Explicit.png";
+                case "Not Rated":
+                    return "RequiredTag_None.png";
+
+                case "F/M":
+                    return "RequiredTag_Pairing_FM.png";
+                case "F/F":
+                    return "RequiredTag_Pairing_FF.png";
+                case "M/M":
+                    return "RequiredTag_Pairing_MM.png";
+                case "Gen":
+                    return "RequiredTag_Pairing_Gen.png";
+                case "Multi":
+                    return "RequiredTag_Pairing_Multi.png";
+                case "Other":
+                    return "RequiredTag_Pairing_Other.png";
+
+                case "Work in Progress":
+                    return "RequiredTag_Progress_Incomplete.png";
+                case "Complete Work":
+                    return "RequiredTag_Progress_Complete.png";
+
+                case "Choose Not To Use Archive Warnings":
+                    return "RequiredTag_Warning_AuthorChoseNot.png";
+                case "No Archive Warnings Apply":
+                    return "RequiredTag_None.png";
+                case "External Work":
+                    return "RequiredTag_Warning_ExternalWork.png";
+            }
+            
+            return "NO VALID TAG FOUND for " + tagStr;
+        }
         /*
          public Work(string id, string title, string author, string recipientUsers = "", string fandoms = "", string requiredTags = "",
                  string lastUpdated = "", string tags = "", string summary = "", string series = "", string seriesIds = "",

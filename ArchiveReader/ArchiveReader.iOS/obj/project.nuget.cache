@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RpEwEK2zzn64zkMf9JrmBmuuNvfst2yVpPednc0TMeycAIPZbQCehz7oTMdcPOVEQxKxsuxjoe/NWJ7mg2ZlJw==",
+  "dgSpecHash": "zZh2NnvZtZfVazpqJ4DRJK9q+PGfGgwzFGrJncZipGinPcfmvmSWziDJFr3GiXZcf67PZPaCw1cnpkDhVnSSsA==",
   "success": false,
-  "projectFilePath": "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader.iOS\\ArchiveReader.iOS.csproj",
+  "projectFilePath": "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader.iOS\\ArchiveReader.iOS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Taylor Roseberry\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\Taylor Roseberry\\.nuget\\packages\\microsoft.visualstudio.language.intellisense\\17.0.487\\microsoft.visualstudio.language.intellisense.17.0.487.nupkg.sha512",

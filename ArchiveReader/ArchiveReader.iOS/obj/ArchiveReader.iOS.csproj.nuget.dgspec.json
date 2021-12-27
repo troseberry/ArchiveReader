@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader.iOS\\ArchiveReader.iOS.csproj": {}
+    "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader.iOS\\ArchiveReader.iOS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader.iOS\\ArchiveReader.iOS.csproj": {
+    "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader.iOS\\ArchiveReader.iOS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader.iOS\\ArchiveReader.iOS.csproj",
+        "projectUniqueName": "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader.iOS\\ArchiveReader.iOS.csproj",
         "projectName": "ArchiveReader.iOS",
-        "projectPath": "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader.iOS\\ArchiveReader.iOS.csproj",
+        "projectPath": "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader.iOS\\ArchiveReader.iOS.csproj",
         "packagesPath": "C:\\Users\\Taylor Roseberry\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader.iOS\\obj\\",
+        "outputPath": "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader.iOS\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
@@ -32,8 +32,8 @@
         "frameworks": {
           "xamarinios10": {
             "projectReferences": {
-              "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader\\ArchiveReader.csproj": {
-                "projectPath": "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader\\ArchiveReader.csproj"
+              "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader\\ArchiveReader.csproj": {
+                "projectPath": "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader\\ArchiveReader.csproj"
               }
             }
           }
@@ -65,14 +65,14 @@
         }
       }
     },
-    "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader\\ArchiveReader.csproj": {
+    "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader\\ArchiveReader.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader\\ArchiveReader.csproj",
+        "projectUniqueName": "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader\\ArchiveReader.csproj",
         "projectName": "ArchiveReader",
-        "projectPath": "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader\\ArchiveReader.csproj",
+        "projectPath": "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader\\ArchiveReader.csproj",
         "packagesPath": "C:\\Users\\Taylor Roseberry\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader\\obj\\",
+        "outputPath": "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",

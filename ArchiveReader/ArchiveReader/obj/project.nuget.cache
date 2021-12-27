@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RWoKW0wbiaplde1C+OsOumcbYZsujY/Ye1NM2TRhsJHphD8sHAeHAS5SlQZq9c1Dv9H1ybGDYbmht3AkpWpn6g==",
+  "dgSpecHash": "PljQF/YFYNvSbq+Jft2CfnLeX/05NGKKlhFCfj1EEFl8PSFPGcTZaFh4Xnzf42T7JYoA4Pjaz/XbM0Vdv0FRoA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader\\ArchiveReader.csproj",
+  "projectFilePath": "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader\\ArchiveReader.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Taylor Roseberry\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\Taylor Roseberry\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

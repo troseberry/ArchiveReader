@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jT0xYckPys3YtErThaCmZEz+J2vOci7PGBNg5ZXbBT9cFU7RWti7BKPvJjRKcogRdjzgw0P4zmzGzviuYlwY8w==",
+  "dgSpecHash": "m33Z4ma83oYhdo7nS+3NSmYR3FrFgDJwwa8LxLHHGKMVmlK9Qj287CNiKVi7TFevPM4K5vOKsegE3cVCf9l61A==",
   "success": false,
-  "projectFilePath": "C:\\Users\\Taylor Roseberry\\source\\repos\\ArchiveReader\\ArchiveReader\\ArchiveReader.Android\\ArchiveReader.Android.csproj",
+  "projectFilePath": "C:\\Users\\Taylor Roseberry\\Documents\\GitHub\\ArchiveReader\\ArchiveReader\\ArchiveReader.Android\\ArchiveReader.Android.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Taylor Roseberry\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\Taylor Roseberry\\.nuget\\packages\\microsoft.visualstudio.language.intellisense\\17.0.487\\microsoft.visualstudio.language.intellisense.17.0.487.nupkg.sha512",
