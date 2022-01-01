@@ -70,12 +70,14 @@ namespace ArchiveReader.Views
 
         private void ResultsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-
+            resultsListView.SelectedItem = null;
         }
 
         private void ResultsListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
+            Work selectedWork = e.Item as Work;
 
+            Navigation.PushAsync(new WorkDetailPage(selectedWork));
         }
     }
 }

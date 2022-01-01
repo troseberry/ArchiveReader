@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArchiveReader.Views.WorkDetailPage">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label Text="{Binding lastUpdated}" HorizontalTextAlignment="End" />
+            <Label Text="{Binding title}" FontAttributes="Bold" FontSize="18"/>
+            <Label Text="{Binding author}" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0, 20">
+                <Button Text="Read" Pressed="ReadButton_Pressed"/>
+                <Button Text="Save" Pressed="SaveButton_Pressed"/>
+            </StackLayout>
+            
+            <!-- visual divider here -->
+
+            <Label Text="{Binding fandoms}" />
+            <Label Text="{Binding tags}" />
+            <Label Text="{Binding summary}" />
+
+            <!-- visual divider here -->
+
+            <Label Text="{Binding AllStats}" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

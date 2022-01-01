@@ -33,6 +33,7 @@ namespace ArchiveReader.Models
 
 
         public string AllStats { get; set; }
+        public string ReadingStats { get; set; }
         public string[] RequiredTagsArray { get; set; }
 
         
@@ -43,7 +44,7 @@ namespace ArchiveReader.Models
 
         public void GenerateExtraInfo()
         {
-            #region Stats
+            #region All Stats
             if (!string.IsNullOrWhiteSpace(language))
             {
                 AllStats += $"Language: {language}";
@@ -51,42 +52,41 @@ namespace ArchiveReader.Models
 
             if (!string.IsNullOrWhiteSpace(wordCount))
             {
-                AllStats += $" Words: {wordCount}";
+                AllStats += $" | Words: {wordCount}";
             }
 
             if (!string.IsNullOrWhiteSpace(chapterCount))
             {
-                AllStats += $" Chapters: {chapterCount}";
+                AllStats += $" | Chapters: {chapterCount}";
             }
 
             if (!string.IsNullOrWhiteSpace(collections))
             {
-                AllStats += $" Collections: {collections}";
+                AllStats += $" | Collections: {collections}";
             }
 
             if (!string.IsNullOrWhiteSpace(comments))
             {
-                AllStats += $" Comments: {comments}";
+                AllStats += $" | Comments: {comments}";
             }
 
             if (!string.IsNullOrWhiteSpace(kudos))
             {
-                AllStats += $" Kudos: {kudos}";
+                AllStats += $" | Kudos: {kudos}";
             }
 
             if (!string.IsNullOrWhiteSpace(bookmarks))
             {
-                AllStats += $" Bookmarks: {bookmarks}";
+                AllStats += $" | Bookmarks: {bookmarks}";
             }
 
             if (!string.IsNullOrWhiteSpace(hits))
             {
-                AllStats += $" Hits: {hits}";
+                AllStats += $" | Hits: {hits}";
             }
             #endregion
 
-            //[Teen And Up Audiences], [Choose Not To Use Archive Warnings], [Multi], [Work in Progress]"
-            #region Required Tags
+            #region Required Tags Array
             RequiredTagsArray = new string[4];
 
             string[] reqStrings = requiredTags.Split('[');

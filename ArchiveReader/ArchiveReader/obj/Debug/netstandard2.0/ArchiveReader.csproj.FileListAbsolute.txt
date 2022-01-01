@@ -38,3 +38,5 @@ C:\Users\Taylor Roseberry\Documents\GitHub\ArchiveReader\ArchiveReader\ArchiveRe
 C:\Users\Taylor Roseberry\Documents\GitHub\ArchiveReader\ArchiveReader\ArchiveReader\obj\Debug\netstandard2.0\ArchiveReader.dll
 C:\Users\Taylor Roseberry\Documents\GitHub\ArchiveReader\ArchiveReader\ArchiveReader\obj\Debug\netstandard2.0\ref\ArchiveReader.dll
 C:\Users\Taylor Roseberry\Documents\GitHub\ArchiveReader\ArchiveReader\ArchiveReader\obj\Debug\netstandard2.0\ArchiveReader.pdb
+C:\Users\Taylor Roseberry\Documents\GitHub\ArchiveReader\ArchiveReader\ArchiveReader\obj\Debug\netstandard2.0\Views\WorkDetailPage.xaml.g.cs
+C:\Users\Taylor Roseberry\Documents\GitHub\ArchiveReader\ArchiveReader\ArchiveReader\obj\Debug\netstandard2.0\Views\ReaderPage.xaml.g.cs
