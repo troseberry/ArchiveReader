@@ -8,12 +8,19 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using ArchiveReader.Models;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace ArchiveReader.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ReaderPage : ContentPage
     {
+        string apiFunctionPath;
+        private string resultString;
+        HttpClient client = new HttpClient();
+
         public ReaderPage()
         {
             InitializeComponent();
@@ -23,17 +30,45 @@ namespace ArchiveReader.Views
         {
             InitializeComponent();
 
-            string url = $"archiveofourown.org/works/{workToRead.id}";
+            client.BaseAddress = new Uri("http://localhost:64195/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            WebView webpage = new WebView
+            string chapterNumber = "2";
+
+            apiFunctionPath = $"ao3api.netlify.app/.netlify/functions/GetWorkBodyContentForChapter?workId={workToRead.id}&lastId={workToRead.latestChapterId}&chapterNumber={chapterNumber}";
+
+            RunAPICall();
+        }
+
+        private async void RunAPICall()
+        {
+            try
             {
-                Source = $"https://" + url,
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                WidthRequest = 1000,
-                HeightRequest = 1000
-            };
+                HttpResponseMessage response = await client.GetAsync(apiFunctionPath);
+                if (response.IsSuccessStatusCode)
+                {
+                    resultString = await response.Content.ReadAsStringAsync();
 
-            webViewStackLayout.Children.Add(webpage);
+                    var htmlSource = new HtmlWebViewSource();
+                    htmlSource.Html = resultString;
+
+                    WebView webpage = new WebView
+                    {
+                        //Source = $"https://" + url,
+                        Source = htmlSource,
+                        VerticalOptions = LayoutOptions.FillAndExpand,
+                        WidthRequest = 1000,
+                        HeightRequest = 1000
+                    };
+
+                    webViewStackLayout.Children.Add(webpage);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
         }
     }
 }

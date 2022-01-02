@@ -31,6 +31,8 @@ namespace ArchiveReader.Models
         public string bookmarks { get; set; }
         public string hits { get; set; }
 
+        public string latestChapterId { get; set; }
+
 
         public string AllStats { get; set; }
         public string ReadingStats { get; set; }
