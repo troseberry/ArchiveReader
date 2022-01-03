@@ -11,6 +11,7 @@ using ArchiveReader.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using System.Diagnostics;
 
 namespace ArchiveReader.Views
 {
@@ -34,9 +35,12 @@ namespace ArchiveReader.Views
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string chapterNumber = "2";
+            string chapterNumber = "1";
 
             apiFunctionPath = $"ao3api.netlify.app/.netlify/functions/GetWorkBodyContentForChapter?workId={workToRead.id}&lastId={workToRead.latestChapterId}&chapterNumber={chapterNumber}";
+            apiFunctionPath = "https://" + apiFunctionPath;
+
+            Debug.WriteLine("Api Func Path: " + apiFunctionPath);
 
             RunAPICall();
         }
@@ -50,12 +54,14 @@ namespace ArchiveReader.Views
                 {
                     resultString = await response.Content.ReadAsStringAsync();
 
+                    resultString = resultString.Replace(@"\n", string.Empty);
+                    resultString = resultString.Replace(@"\", string.Empty);
+
                     var htmlSource = new HtmlWebViewSource();
                     htmlSource.Html = resultString;
 
                     WebView webpage = new WebView
                     {
-                        //Source = $"https://" + url,
                         Source = htmlSource,
                         VerticalOptions = LayoutOptions.FillAndExpand,
                         WidthRequest = 1000,
