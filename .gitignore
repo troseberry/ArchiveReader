@@ -12,7 +12,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-ArchiveReader.Android\obj/
+ArchiveReader/ArchiveReader.Android/obj/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
