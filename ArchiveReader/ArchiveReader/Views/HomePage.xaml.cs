@@ -16,5 +16,16 @@ namespace ArchiveReader.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Pressed(object sender, EventArgs e)
+        {
+            //Shell.Current.FlyoutIsPresented = true;
+            NavToReader();
+        }
+
+        private async void NavToReader()
+        {
+            await Navigation.PushAsync(new WorkDetailPage());
+        }
     }
 }

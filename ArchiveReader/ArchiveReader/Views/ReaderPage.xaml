@@ -1,10 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ArchiveReader.Views.ReaderPage">
-    <ContentPage.Content>
-        <StackLayout x:Name="webViewStackLayout">
-            
+             x:Class="ArchiveReader.Views.ReaderPage"
+             xmlns:local ="clr-namespace:ArchiveReader.DataTemplates">
+
+    <!--
+    <ContentPage.BindingContext>
+        <vm:ReaderViewModel />
+    </ContentPage.BindingContext>
+    -->
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label Text="{Binding title}" VerticalTextAlignment="Center" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation"/>
+            <Image Source="icon_menu_white.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="30" Margin="0, 0, 15, 0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="HamburgerMenuPressed" />
+                </Image.GestureRecognizers>
+            </Image>
         </StackLayout>
+    </Shell.TitleView>
+
+    <!--
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior
+        Command="{Binding GoBackCommand}"
+        IsEnabled="True" />
+    </Shell.BackButtonBehavior>
+ -->
+    <ContentPage.Content>
+        <AbsoluteLayout x:Name="LayoutParent">
+
+            <StackLayout x:Name="ChaptersPanel"
+                         AbsoluteLayout.LayoutBounds="0, .5, .65, 1"
+                         AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"
+                         BackgroundColor="White"
+                         IsVisible="false">
+                <ListView x:Name="chaptersListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Label Text="{Binding title}" FontAttributes="Bold" TextColor="Black"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            
+            <StackLayout x:Name="TapCatcher"
+                         AbsoluteLayout.LayoutBounds="1, .5, .35, 1"
+                         AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"
+                         BackgroundColor="Black"
+                         Opacity=".5"
+                         IsVisible="false">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="HamburgerMenuPressed" />
+                </StackLayout.GestureRecognizers>
+                <Image Source="icon_menu_white.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="30" Margin="0, 15, 15, 0">
+                </Image>
+            </StackLayout>
+            
+            <StackLayout x:Name="MainContentLayout"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                AbsoluteLayout.LayoutFlags="All"
+                Spacing="0">
+                <StackLayout x:Name="webViewStackLayout">
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+        
+        
     </ContentPage.Content>
 </ContentPage>

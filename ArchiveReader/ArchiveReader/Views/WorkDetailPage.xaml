@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ArchiveReader.Views.WorkDetailPage">
+             x:Class="ArchiveReader.Views.WorkDetailPage"
+             Title="Work Details">
     <ContentPage.Content>
-        <StackLayout Padding="20">
+        <StackLayout Padding="20" x:Name="DetailsStackLayout">
             <Label Text="{Binding lastUpdated}" HorizontalTextAlignment="End" />
             <Label Text="{Binding title}" FontAttributes="Bold" FontSize="18"/>
             <Label Text="{Binding author}" />

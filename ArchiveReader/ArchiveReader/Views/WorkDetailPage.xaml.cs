@@ -8,6 +8,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using ArchiveReader.Models;
+using System.Text.Json;
+using System.Diagnostics;
 
 namespace ArchiveReader.Views
 {
@@ -18,6 +20,7 @@ namespace ArchiveReader.Views
         public WorkDetailPage()
         {
             InitializeComponent();
+            Debug.WriteLine("Init WorkDetailPage");
         }
 
         public WorkDetailPage(Work workToDisplay)
@@ -28,14 +31,18 @@ namespace ArchiveReader.Views
             BindingContext = workToDisplay;
         }
 
-        private void ReadButton_Pressed(object sender, EventArgs e)
+        private async void ReadButton_Pressed(object sender, EventArgs e)
+
         {
-            Navigation.PushAsync(new ReaderPage(currentWork));
+            await Navigation.PushAsync(new ReaderPage(currentWork));
+            //await Navigation.PushAsync(new ReaderPage());
+            //GoToReader();
         }
 
-        private void SaveButton_Pressed(object sender, EventArgs e)
+        private async void SaveButton_Pressed(object sender, EventArgs e)
         {
-
+            //await Navigation.PushAsync(new WorkDetailPage());
+            await Navigation.PushAsync(new ReaderPage());
         }
     }
 }

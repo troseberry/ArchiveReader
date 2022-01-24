@@ -73,11 +73,10 @@ namespace ArchiveReader.Views
             resultsListView.SelectedItem = null;
         }
 
-        private void ResultsListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void ResultsListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             Work selectedWork = e.Item as Work;
-
-            Navigation.PushAsync(new WorkDetailPage(selectedWork));
+            await Navigation.PushAsync(new WorkDetailPage(selectedWork));
         }
     }
 }
