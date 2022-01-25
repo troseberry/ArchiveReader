@@ -30,18 +30,32 @@
     <ContentPage.Content>
         <AbsoluteLayout x:Name="LayoutParent">
 
+
+            <StackLayout x:Name="FakeHeader"
+                         Orientation="Horizontal"
+                         AbsoluteLayout.LayoutBounds=".5, 0, 1, 56"
+                         AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                         BackgroundColor="Black"
+                         IsVisible="false">
+                <BoxView HeightRequest="35" WidthRequest="35" Margin="15, 0"/>
+                <Label Text="{Binding title}" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" FontAttributes="Bold" Padding="0, 0" FontSize="20"/>
+            </StackLayout>
+            
             <StackLayout x:Name="ChaptersPanel"
                          AbsoluteLayout.LayoutBounds="0, .5, .65, 1"
                          AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"
                          BackgroundColor="White"
-                         IsVisible="false">
-                <ListView x:Name="chaptersListView">
+                         IsVisible="false"
+                         Padding="10">
+                <Label Text="Chapters" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>
+                <BoxView HeightRequest="5" Color="Black"/>
+                <ListView x:Name="chaptersListView"
+                          ItemSelected="ChaptersListView_ItemSelected"
+                          ItemTapped="ChaptersListView_ItemTapped">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid>
-                                    <Label Text="{Binding title}" FontAttributes="Bold" TextColor="Black"/>
-                                </Grid>
+                                <Label Text="{Binding title}" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center"/>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -60,6 +74,8 @@
                 <Image Source="icon_menu_white.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="30" Margin="0, 15, 15, 0">
                 </Image>
             </StackLayout>
+
+            
             
             <StackLayout x:Name="MainContentLayout"
                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
@@ -68,6 +84,8 @@
                 <StackLayout x:Name="webViewStackLayout">
                 </StackLayout>
             </StackLayout>
+
+            
         </AbsoluteLayout>
         
         

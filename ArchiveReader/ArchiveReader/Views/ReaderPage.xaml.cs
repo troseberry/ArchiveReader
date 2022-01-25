@@ -21,86 +21,44 @@ namespace ArchiveReader.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ReaderPage : ContentPage
     {
-        Work currentWork;
-        HttpClient client;
-        WebView webView;
-        HtmlWebViewSource htmlSource;
+        private HttpClient _client;
+        private WebView _webView;
+        private HtmlWebViewSource _htmlSource;
 
-        private string apiFunctionPath;
-        private string resultString;
-
-        List<MenuItem> chapters;
+        private Work _currentWork;
+        private int _currentChapterNumber;
+        private string _apiFunctionPath;
+        private ObservableCollection<Chapter> _chapters;
 
         public ReaderPage()
         {
             InitializeComponent();
-
-            /*
-            client = new HttpClient();
-            apiFunctionPath = "";
-
-            Debug.WriteLine("Init Component");
-
-            Work testBind = new Work();
-            testBind.title = "Liminal";
-            testBind.latestChapterId = "90934045";
-            testBind.id = "36130966";
-
-            client = new HttpClient();
-            client.BaseAddress = new Uri("https://ao3api.netlify.app/.netlify/functions/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            currentWork = testBind;
-            BindingContext = currentWork;
-
-            htmlSource = new HtmlWebViewSource();
-            webView = new WebView();
-
-            webView.Source = htmlSource;
-            webView.VerticalOptions = LayoutOptions.FillAndExpand;
-            webView.WidthRequest = 1000;
-            webView.HeightRequest = 1000;
-
-            webViewStackLayout.Children.Add(webView);
-
-            Shell.SetBackButtonBehavior(this, new BackButtonBehavior()
-            {
-                Command = new Command(async () => {
-
-                    Debug.WriteLine("AppShell Instance: " + AppShell.Instance == null);
-                    await Shell.Current.Navigation.PopAsync();
-                })
-            });
-            */
         }
 
         public ReaderPage(Work workToRead)
         {
             InitializeComponent();
-            Debug.WriteLine("Init Component");
 
-            currentWork = workToRead;
-            apiFunctionPath = "";
+            _client = new HttpClient()
+            {
+                BaseAddress = new Uri("https://ao3api.netlify.app/.netlify/functions/"),
+            };
+            _client.DefaultRequestHeaders.Accept.Clear();
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            client = new HttpClient();
-            client.BaseAddress = new Uri("https://ao3api.netlify.app/.netlify/functions/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _htmlSource = new HtmlWebViewSource();
+            _webView = new WebView()
+            {
+                Source = _htmlSource,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                WidthRequest = 1000,
+                HeightRequest = 1000
+            };
+            webViewStackLayout.Children.Add(_webView);
 
-            BindingContext = currentWork;
-
-            htmlSource = new HtmlWebViewSource();
-            webView = new WebView();
-
-            webView.Source = htmlSource;
-            webView.VerticalOptions = LayoutOptions.FillAndExpand;
-            webView.WidthRequest = 1000;
-            webView.HeightRequest = 1000;
-
-            webViewStackLayout.Children.Add(webView);
-
-            chaptersListView.BindingContext = chapters;
+            _currentWork = workToRead;
+            _apiFunctionPath = "";
+            chaptersListView.ItemsSource = _chapters;
 
             Shell.SetBackButtonBehavior(this, new BackButtonBehavior()
             {
@@ -110,121 +68,126 @@ namespace ArchiveReader.Views
                     await Navigation.PopAsync();
                 })
             });
+
+            BindingContext = _currentWork;
         }
 
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
 
-            if (currentWork != null) SetUpReader();
+            if (_currentWork != null) SetUpReader();
         }
 
-        protected override void OnAppearing()
+        private async void SetUpReader()
         {
-            base.OnAppearing();
-            Debug.WriteLine("OnAppearing");
-        }
-
-        protected override void OnDisappearing()
-        {
-            base.OnAppearing();
-            Debug.WriteLine("OnDisappearing");
-        }
-
-        private void SetUpReader()
-        {
-            HandleWorkBody("1");
-            HandleChapters();
+            await HandleWorkBody(1);
+            await HandleChapters();
             //Debug.WriteLine("SetUpReader");
         }
 
         //change task type to bool to return success?
-        private async void HandleWorkBody(string chapterNumber)
+        private async Task<bool> HandleWorkBody(int chapterNumber)
         {
-            //Debug.WriteLine(Environment.StackTrace);
-            //string chapterNumber = "1";
-            apiFunctionPath = $"GetWorkBodyContentForChapter?workId={currentWork.id}&lastId={currentWork.latestChapterId}&chapterNumber={chapterNumber}";
-
-            Debug.WriteLine("Api Func Path: " + apiFunctionPath);
+            _apiFunctionPath = $"GetWorkBodyContentForChapter?workId={_currentWork.id}&lastId={_currentWork.latestChapterId}&chapterNumber={chapterNumber}";
+            //Debug.WriteLine("[HandleWorkBody] - Api Func Path: " + _apiFunctionPath);
 
             try
             {
-                HttpResponseMessage response = await client.GetAsync(apiFunctionPath);
+                HttpResponseMessage response = await _client.GetAsync(_apiFunctionPath);
                 if (response.IsSuccessStatusCode)
                 {
-                    htmlSource.Html = "";
+                    _htmlSource.Html = "";
 
-                    resultString = await response.Content.ReadAsStringAsync();
+                    string contentString = await response.Content.ReadAsStringAsync();
 
-                    resultString = resultString.Replace(@"\n", string.Empty);
-                    resultString = resultString.Replace(@"\", string.Empty);
+                    contentString = contentString.Replace(@"\n", string.Empty);
+                    contentString = contentString.Replace(@"\", string.Empty);
 
-                    htmlSource.Html = resultString;
+                    _htmlSource.Html = contentString;
 
-                    /*
-                    if (Shell.Current.FlyoutIsPresented)
-                    {
-                        Shell.Current.FlyoutIsPresented = false;
-                    }
-                    */
+                    _currentChapterNumber = chapterNumber;
+
+                    return true;
                 }
             }
             catch (Exception e)
             {
-
+                return false;
             }
+
+            return false;
         }
 
-        private async void HandleChapters()
+        private async Task<bool> HandleChapters()
         {
-            Debug.WriteLine("HandleChapters");
-            apiFunctionPath = $"GetChaptersForFanfic?workId={currentWork.id}&lastId={currentWork.latestChapterId}";
+            _apiFunctionPath = $"GetChaptersForFanfic?workId={_currentWork.id}&lastId={_currentWork.latestChapterId}";
+            //Debug.WriteLine("[HandleChapters] - Api Func Path: " + _apiFunctionPath);
 
             try
             {
-                HttpResponseMessage response = await client.GetAsync(apiFunctionPath);
+                HttpResponseMessage response = await _client.GetAsync(_apiFunctionPath);
                 if (response.IsSuccessStatusCode)
                 {
-                    resultString = await response.Content.ReadAsStringAsync();
-                    List<Chapter> outputChapters = JsonSerializer.Deserialize<List<Chapter>>(resultString);
+                    string contentString = await response.Content.ReadAsStringAsync();
+                    List<Chapter> outputChapters = JsonSerializer.Deserialize<List<Chapter>>(contentString);
 
-                    chapters = new List<MenuItem>();
-                    for (int i = 0; i < outputChapters.Count; i++)
+                    _chapters = new ObservableCollection<Chapter>();
+                    foreach (Chapter chapter in outputChapters)
                     {
-                        string[] titleSplit = outputChapters[i].title.Split(new[] { '.' }, 2);
-
-                        MenuItem newChap = new MenuItem
-                        {
-                            Text = outputChapters[i].title,
-                            IconImageSource = "icon_feed.png",
-                            Command = new Command(() => HandleWorkBody(titleSplit[0])),
-                        };
-                        chapters.Add(newChap);
+                        //string[] titleSplit = chapter.title.Split(new[] { '.' }, 2);
+                        _chapters.Add(chapter);
                     }
+
+                    chaptersListView.ItemsSource = _chapters;
+                    return true;
                 }
             }
             catch (Exception e)
             {
-
+                return false;
             }
+
+            return false;
         }
 
         private void HamburgerMenuPressed(object sender, EventArgs e)
+
+        {
+            ToggleChaptersMenu();
+        }
+
+        private void ToggleChaptersMenu()
         {
             Shell.SetTabBarIsVisible(this, !Shell.GetTabBarIsVisible(this));
             Shell.SetNavBarIsVisible(this, !Shell.GetNavBarIsVisible(this));
 
             ChaptersPanel.IsVisible = !ChaptersPanel.IsVisible;
             TapCatcher.IsVisible = !TapCatcher.IsVisible;
+            FakeHeader.IsVisible = !FakeHeader.IsVisible;
 
             if (TapCatcher.IsVisible)
             {
-                LayoutParent.RaiseChild(TapCatcher);
-                LayoutParent.RaiseChild(ChaptersPanel);
+                LayoutParent.LowerChild(MainContentLayout);
             }
             else
             {
                 LayoutParent.RaiseChild(MainContentLayout);
+            }
+        }
+
+        private void ChaptersListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            chaptersListView.SelectedItem = null;
+        }
+
+        private async void ChaptersListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            if ((e.ItemIndex + 1) != _currentChapterNumber)
+            {
+                ToggleChaptersMenu();
+                await HandleWorkBody(e.ItemIndex + 1);
+                //eventually implement loading overlay
             }
         }
     }
