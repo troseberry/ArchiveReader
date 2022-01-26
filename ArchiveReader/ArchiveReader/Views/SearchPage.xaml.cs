@@ -26,7 +26,7 @@ namespace ArchiveReader.Views
         {
             InitializeComponent();
 
-            client.BaseAddress = new Uri("http://localhost:64195/");
+            client.BaseAddress = new Uri("https://ao3api.netlify.app/.netlify/functions/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -38,7 +38,7 @@ namespace ArchiveReader.Views
             //https://thirsty-kilby-a79641.netlify.app/.netlify/functions/GetAllFanficsOnPage?tagName=dcu&pageNumber=1
             //https://ao3api.netlify.app/.netlify/functions/GetAllFanficsOnPage?tagName=dcu
 
-            apiFunctionPath = "https://ao3api.netlify.app/.netlify/functions/GetAllFanficsOnPage?tagName=" + searchBar.Text;
+            apiFunctionPath = $"GetAllFanficsOnPage?tagName={searchBar.Text}";
             //resultsLabel.Text = searchBar.Text;
             RunAPICall();
 
@@ -77,6 +77,11 @@ namespace ArchiveReader.Views
         {
             Work selectedWork = e.Item as Work;
             await Navigation.PushAsync(new WorkDetailPage(selectedWork));
+        }
+
+        private void SortFilterButton_Pressed(object sender, EventArgs e)
+        {
+
         }
     }
 }

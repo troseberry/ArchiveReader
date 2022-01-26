@@ -61,7 +61,7 @@
         <ShellContent Title="Library" Icon="icon_feed.png" Route="LibraryPage" ContentTemplate="{DataTemplate local:LibraryPage}" />
         <ShellContent Title="Browse" Icon="icon_about.png" ContentTemplate="{DataTemplate local:BrowsePage}" />
         <ShellContent Title="Search" Icon="icon_about.png" Route="SearchPage" ContentTemplate="{DataTemplate local:SearchPage}" />
-        <ShellContent Title="Read" Icon="icon_feed.png" Route="ReaderPage" ContentTemplate="{DataTemplate local:ReaderPage}" />
+        <ShellContent Title="Sort" Icon="icon_feed.png" Route="SortFilterPage" ContentTemplate="{DataTemplate local:SortFilterPage}"/>
     </TabBar>
 
     <!--

@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArchiveReader.Views.SortFilterPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Padding="25">
+                    <StackLayout Padding="0, 10">
+                        <Label Text="Sort By" FontSize="24"/>
+                        <Picker x:Name="sortByPicker" Title="Sort by">
+                            <Picker.Items>
+                                <x:String>Author</x:String>
+                                <x:String>Title</x:String>
+                                <x:String>Date Posted</x:String>
+                                <x:String>Date Updated</x:String>
+                                <x:String>Word Count</x:String>
+                                <x:String>Hits</x:String>
+                                <x:String>Kudos</x:String>
+                                <x:String>Comments</x:String>
+                                <x:String>Bookmarks</x:String>
+                            </Picker.Items>
+                            <Picker.SelectedIndex>3</Picker.SelectedIndex>
+                        </Picker>
+                    </StackLayout>
+
+                    <BoxView BackgroundColor="#404040" HeightRequest="5" Margin="-15, 0" CornerRadius="10"/>
+
+                    <StackLayout>
+                        <Label Text="Include" FontSize="24"/>
+
+                        <Label Text="Ratings" FontSize="18" Padding="20, 0"/>
+                        <StackLayout Padding="30, 0">
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="generalRatingIncludeCheckbox"/>
+                                <Label Text="General Audiences" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="teenRatingIncludeCheckbox"/>
+                                <Label Text="Teen And Up Audiences" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="matureRatingIncludeCheckbox"/>
+                                <Label Text="Mature" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="explicitRatingIncludeCheckbox"/>
+                                <Label Text="Explicit" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="noRatingIncludeCheckbox"/>
+                                <Label Text="Not Rated" VerticalTextAlignment="Center" />
+                            </StackLayout>
+                        </StackLayout>
+
+                        <Label Text="Warnings" FontSize="18" Padding="20, 0"/>
+                        <StackLayout Padding="30, 0">
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="noWarningIncludeCheckbox"/>
+                                <Label Text="No Archive Warnings Apply" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="choseNotToUseWarningIncludeCheckbox"/>
+                                <Label Text="Creator Chose Not To Use Archive Warnings" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="graphicViolenceWarningIncludeCheckbox"/>
+                                <Label Text="Graphic Depictions of Violence" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="majorcharacterDeathWarningIncludeCheckbox"/>
+                                <Label Text="Major Character Death" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="nonConWarningIncludeCheckbox"/>
+                                <Label Text="Rape/Non-Con" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="underageWarningIncludeCheckbox"/>
+                                <Label Text="Underage" VerticalTextAlignment="Center" />
+                            </StackLayout>
+                        </StackLayout>
+
+                        <Label Text="Categories" FontSize="18" Padding="20, 0"/>
+                        <StackLayout Padding="30, 0">
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="genCategoryIncludeCheckbox"/>
+                                <Label Text="Gen" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="fmCategoryIncludeCheckbox"/>
+                                <Label Text="F/M" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="ffCategoryIncludeCheckbox"/>
+                                <Label Text="F/F" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="mmCategoryIncludeCheckbox"/>
+                                <Label Text="M/M" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="multiCategoryIncludeCheckbox"/>
+                                <Label Text="Multi" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="otherCategoryIncludeCheckbox"/>
+                                <Label Text="Other" VerticalTextAlignment="Center" />
+                            </StackLayout>
+                        </StackLayout>
+
+                        <StackLayout Padding="0, 10">
+                            <Label Text="Other Tags to Include" FontSize="18"/>
+                            <Entry x:Name="otherTagsIncludeEntry" Placeholder="separated by commas. case sensative"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <BoxView BackgroundColor="#404040" HeightRequest="5" Margin="-15, 0" CornerRadius="10"/>
+
+                    <StackLayout>
+                        <Label Text="Exclude" FontSize="24"/>
+
+                        <Label Text="Ratings" FontSize="18" Padding="20, 0"/>
+                        <StackLayout Padding="30, 0">
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="generalRatingExcludeCheckbox"/>
+                                <Label Text="General Audiences" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="teenRatingExcludeCheckbox"/>
+                                <Label Text="Teen And Up Audiences" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="matureRatingExcludeCheckbox"/>
+                                <Label Text="Mature" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="explicitRatingExcludeCheckbox"/>
+                                <Label Text="Explicit" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="noRatingExcludeCheckbox"/>
+                                <Label Text="Not Rated" VerticalTextAlignment="Center" />
+                            </StackLayout>
+                        </StackLayout>
+
+                        <Label Text="Warnings" FontSize="18" Padding="20, 0"/>
+                        <StackLayout Padding="30, 0">
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="noWarningExcludeCheckbox"/>
+                                <Label Text="No Archive Warnings Apply" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="choseNotToUseWarningExcludeCheckbox"/>
+                                <Label Text="Creator Chose Not To Use Archive Warnings" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="graphicViolenceWarningExcludeCheckbox"/>
+                                <Label Text="Graphic Depictions of Violence" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="majorcharacterDeathWarningExcludeCheckbox"/>
+                                <Label Text="Major Character Death" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="nonConWarningExcludeCheckbox"/>
+                                <Label Text="Rape/Non-Con" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="underageWarningExcludeCheckbox"/>
+                                <Label Text="Underage" VerticalTextAlignment="Center" />
+                            </StackLayout>
+                        </StackLayout>
+
+                        <Label Text="Categories" FontSize="18" Padding="20, 0"/>
+                        <StackLayout Padding="30, 0">
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="genCategoryExcludeCheckbox"/>
+                                <Label Text="Gen" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="fmCategoryExcludeCheckbox"/>
+                                <Label Text="F/M" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="ffCategoryExcludeCheckbox"/>
+                                <Label Text="F/F" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="mmCategoryExcludeCheckbox"/>
+                                <Label Text="M/M" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="multiCategoryExcludeCheckbox"/>
+                                <Label Text="Multi" VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="otherCategoryExcludeCheckbox"/>
+                                <Label Text="Other" VerticalTextAlignment="Center" />
+                            </StackLayout>
+                        </StackLayout>
+
+                        <StackLayout Padding="0, 10">
+                            <Label Text="Other Tags to Exclude" FontSize="18"/>
+                            <Entry x:Name="otherTagsExcludeEntry" Placeholder="separated by commas. case sensative"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <BoxView BackgroundColor="#404040" HeightRequest="5" Margin="-15, 0" CornerRadius="10"/>
+
+                    <StackLayout>
+                        <Label Text="Crossovers" FontSize="24"/>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox x:Name="includeCrossoversCheckbox"/>
+                            <Label Text="Include Crossovers" VerticalTextAlignment="Center" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox x:Name="excludeCrossoversCheckbox"/>
+                            <Label Text="Exclude Crossovers" VerticalTextAlignment="Center" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox x:Name="onlyCrossoversCheckbox"/>
+                            <Label Text="Show Only Crossovers" VerticalTextAlignment="Center" />
+                        </StackLayout>
+                    </StackLayout>
+
+                    <BoxView BackgroundColor="#404040" HeightRequest="5" Margin="-15, 0" CornerRadius="10"/>
+
+                    <StackLayout>
+                        <Label Text="Completion Status" FontSize="24"/>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox x:Name="allWorksCompletionCheckbox"/>
+                            <Label Text="All Works" VerticalTextAlignment="Center" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox x:Name="completeWorksCompletionCheckbox"/>
+                            <Label Text="Complete Works Only" VerticalTextAlignment="Center" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox x:Name="inProgressWorksCompletionCheckbox"/>
+                            <Label Text="Works In Progress Only" VerticalTextAlignment="Center" />
+                        </StackLayout>
+                    </StackLayout>
+
+                    <BoxView BackgroundColor="#404040" HeightRequest="5" Margin="-15, 0" CornerRadius="10"/>
+
+                    <StackLayout>
+                        <Label Text="Word Count" FontSize="24"/>
+                        <Label Text="From" FontSize="18"/>
+                        <Entry x:Name="wordCountFromEntry" />
+                        <Label Text="To" FontSize="18"/>
+                        <Entry x:Name="wordCountToEntry" />
+                    </StackLayout>
+
+                    <BoxView BackgroundColor="#404040" HeightRequest="5" Margin="-15, 0" CornerRadius="10"/>
+
+                    <StackLayout>
+                        <Label Text="Date Updated" FontSize="24"/>
+                        <Label Text="From" FontSize="18"/>
+                        <Entry x:Name="dateUpdatedFromEntry" />
+                        <Label Text="To" FontSize="18"/>
+                        <Entry x:Name="dateUpdatedToEntry" />
+                    </StackLayout>
+
+                    <BoxView BackgroundColor="#404040" HeightRequest="5" Margin="-15, 0" CornerRadius="10"/>
+                    
+                    <StackLayout Padding="0, 10">
+                        <Label Text="Search Within Results" FontSize="24"/>
+                        <Entry x:Name="searchWithinResultsEntry"/>
+                    </StackLayout>
+
+                    <!-- LANGUAGE PICKER -->
+
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0, 15">
+                <Button Text="Cancel" WidthRequest="150" Clicked="CancelButton_Clicked"/>
+                <Button Text="Sort and Filter" WidthRequest="150" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

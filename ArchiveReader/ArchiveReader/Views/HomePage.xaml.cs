@@ -20,12 +20,18 @@ namespace ArchiveReader.Views
         private void Button_Pressed(object sender, EventArgs e)
         {
             //Shell.Current.FlyoutIsPresented = true;
-            NavToReader();
+            //NavToReader();
+            PushFilterModal();
         }
 
         private async void NavToReader()
         {
             await Navigation.PushAsync(new WorkDetailPage());
+        }
+
+        private async void PushFilterModal()
+        {
+            await Navigation.PushModalAsync(new SortFilterPage());
         }
     }
 }

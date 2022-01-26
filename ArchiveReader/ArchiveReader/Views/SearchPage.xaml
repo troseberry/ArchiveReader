@@ -17,7 +17,14 @@
                        PlaceholderColor ="#ededed"
                        TextColor="#ededed"
                        Margin="0" />
-            <Label x:Name="resultsLabel"/>
+            
+            <!-- <Label x:Name="resultsLabel"/> -->
+            <Button Text="Sort &amp; Filter" 
+                    HorizontalOptions="Start" 
+                    WidthRequest="150" 
+                    Margin="15, 5, 0, 0"
+                    Pressed="SortFilterButton_Pressed"/>
+            
             <ListView x:Name="resultsListView"  HasUnevenRows="true"
                       ItemSelected="ResultsListView_ItemSelected"
                       ItemTapped="ResultsListView_ItemTapped" >

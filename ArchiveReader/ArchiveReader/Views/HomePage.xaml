@@ -11,7 +11,7 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Flyout" Pressed="Button_Pressed"/>
+            <Button Text="Filter Modal" Pressed="Button_Pressed"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
