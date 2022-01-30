@@ -12,31 +12,47 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar x:Name="searchBar" 
+            <StackLayout Orientation="Horizontal" Padding="10">
+                <Grid HeightRequest="65">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <SearchBar x:Name="searchBar" Grid.Column="0"
                        Placeholder="Search tag..." 
                        PlaceholderColor ="#ededed"
                        TextColor="#ededed"
-                       Margin="0" 
+                       Margin="-15, 0, 0, 0" 
                        SearchButtonPressed="SearchBar_SearchButtonPressed"/>
-            <StackLayout Orientation="Horizontal" Padding="25, 10, 25, 0">
-                <Button x:Name="sortFilterButton"
-                        Text="Sort &amp; Filter"
+                    <Button x:Name="sortFilterButton" Grid.Column="1"
+                        Text="Sort"
                         IsEnabled="False"
-                        HorizontalOptions="Start"
-                        Clicked="SortFilterButton_Clicked"/>
+                        Clicked="SortFilterButton_Clicked"
+                        HorizontalOptions="EndAndExpand"/>
+                </Grid>
+                
+            </StackLayout>
 
+            <StackLayout Orientation="Horizontal" Padding="25, 10, 25, 0" HorizontalOptions="CenterAndExpand">
                 <Button x:Name="previousPageButton"
                         IsEnabled="False"
                         Text="Prev" 
-                        HorizontalOptions="EndAndExpand"
                         Clicked="PrevButton_Clicked"/>
                 <Label x:Name="currentPageNumberLabel"
                        Text="#" 
                        VerticalTextAlignment="Center" 
                        HorizontalTextAlignment="Center" 
-                       FontSize="18" 
-                       BackgroundColor="#404040" 
-                       WidthRequest="50"/>
+                       FontSize="18"  />
+                <Label Text="/" 
+                       VerticalTextAlignment="Center" 
+                       HorizontalTextAlignment="Center" 
+                       FontSize="18" />
+                <Label x:Name="totalPagesLabel"
+                       Text="#" 
+                       VerticalTextAlignment="Center" 
+                       HorizontalTextAlignment="Center" 
+                       FontSize="18" />
                 <Button x:Name="nextPageButton"
                         Text="Next"
                         Clicked="NextButton_Clicked"/>

@@ -25,6 +25,7 @@ namespace ArchiveReader.Views
         private string _resultString;
 
         private string _currentSearchQuery;
+        private string _currentSortQuery;
         private int _currentPageNumber;
 
         private SortFilterArgs _sortFiterArgs;
@@ -38,6 +39,8 @@ namespace ArchiveReader.Views
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+            _currentSortQuery = "";
+
             MessagingCenter.Subscribe<SortFilterPage,SortFilterArgs>(this, "SortAndFilter", async (sender, args) =>
             {
                 _sortFiterArgs = args;
@@ -49,16 +52,16 @@ namespace ArchiveReader.Views
         private async void SortAndFilterResults()
         {
             loadingActivityIndicator.IsRunning = true;
-            UpdatedApiFunctionPathForSort(_sortFiterArgs);
+            UpdatedSortQuery(_sortFiterArgs);
+            _currentPageNumber = 1;
 
             await RunAPICall();
 
             loadingActivityIndicator.IsRunning = false;
         }
-        private void UpdatedApiFunctionPathForSort(SortFilterArgs newSortArgs)
+        private void UpdatedSortQuery(SortFilterArgs newSortArgs)
         {
-            _apiFunctionPath = $"GetAllFanficsOnPage?tagName={_currentSearchQuery}&pageNumber={_currentPageNumber}" +
-                $"&completion={SortFilterHelper.SFEnumToUrlString(newSortArgs.completion)}" +
+            _currentSortQuery = $"&completion={SortFilterHelper.SFEnumToUrlString(newSortArgs.completion)}" +
                 $"&crossover={SortFilterHelper.SFEnumToUrlString(newSortArgs.crossover)}" +
                 $"&sort={SortFilterHelper.SFEnumToUrlString(newSortArgs.sort)}" +
                 $"&dateFrom={newSortArgs.dateFrom}&dateTo={newSortArgs.dateTo}" +
@@ -68,12 +71,12 @@ namespace ArchiveReader.Views
                 $"&language={newSortArgs.language}" +
                 $"&searchWithinResults={newSortArgs.searchWithinResults}";
 
-            if (newSortArgs.ratingsInclude != RatingsOption.None) _apiFunctionPath += $"&ratingsInclude={SortFilterHelper.SFEnumToUrlString(newSortArgs.ratingsInclude)}";
+            if (newSortArgs.ratingsInclude != RatingsOption.None) _currentSortQuery += $"&ratingsInclude={SortFilterHelper.SFEnumToUrlString(newSortArgs.ratingsInclude)}";
             if (newSortArgs.ratingsExclude.Count > 0)
             {
                 foreach(RatingsOption arg in newSortArgs.ratingsExclude)
                 {
-                    if (arg != RatingsOption.None) _apiFunctionPath += $"&ratingsExclude={SortFilterHelper.SFEnumToUrlString(arg)}";
+                    if (arg != RatingsOption.None) _currentSortQuery += $"&ratingsExclude={SortFilterHelper.SFEnumToUrlString(arg)}";
                 }
             }
 
@@ -81,7 +84,7 @@ namespace ArchiveReader.Views
             {
                 foreach (WarningsOption arg in newSortArgs.warningsInclude)
                 {
-                    if (arg != WarningsOption.None) _apiFunctionPath += $"&warningsInclude={SortFilterHelper.SFEnumToUrlString(arg)}";
+                    if (arg != WarningsOption.None) _currentSortQuery += $"&warningsInclude={SortFilterHelper.SFEnumToUrlString(arg)}";
                 }
             }
 
@@ -89,7 +92,7 @@ namespace ArchiveReader.Views
             {
                 foreach (WarningsOption arg in newSortArgs.warningsExclude)
                 {
-                    if (arg != WarningsOption.None) _apiFunctionPath += $"&warningsExclude={SortFilterHelper.SFEnumToUrlString(arg)}";
+                    if (arg != WarningsOption.None) _currentSortQuery += $"&warningsExclude={SortFilterHelper.SFEnumToUrlString(arg)}";
                 }
             }
 
@@ -97,7 +100,7 @@ namespace ArchiveReader.Views
             {
                 foreach (CategoryOption arg in newSortArgs.categoriesInclude)
                 {
-                    if (arg != CategoryOption.None) _apiFunctionPath += $"&categoriesInclude={SortFilterHelper.SFEnumToUrlString(arg)}";
+                    if (arg != CategoryOption.None) _currentSortQuery += $"&categoriesInclude={SortFilterHelper.SFEnumToUrlString(arg)}";
                 }
             }
 
@@ -105,7 +108,7 @@ namespace ArchiveReader.Views
             {
                 foreach (CategoryOption arg in newSortArgs.categoriesExclude)
                 {
-                    if (arg != CategoryOption.None) _apiFunctionPath += $"&categoriesExclude={SortFilterHelper.SFEnumToUrlString(arg)}";
+                    if (arg != CategoryOption.None) _currentSortQuery += $"&categoriesExclude={SortFilterHelper.SFEnumToUrlString(arg)}";
                 }
             }
         }
@@ -117,9 +120,9 @@ namespace ArchiveReader.Views
 
             try
             {
-                Debug.WriteLine("API Path: " + _apiFunctionPath);
+                Debug.WriteLine("API Path: " + _apiFunctionPath + _currentSortQuery);
 
-                HttpResponseMessage response = await _client.GetAsync(_apiFunctionPath);
+                HttpResponseMessage response = await _client.GetAsync(_apiFunctionPath + _currentSortQuery);
                 if (response.IsSuccessStatusCode)
                 {
                     _resultString = await response.Content.ReadAsStringAsync();
@@ -157,7 +160,9 @@ namespace ArchiveReader.Views
 
             _currentSearchQuery = searchBar.Text;
             _currentPageNumber = 1;
+            _isSorted = false;
             _sortFiterArgs = new SortFilterArgs();
+            _currentSortQuery = "";
 
             _apiFunctionPath = $"GetAllFanficsOnPage?tagName={_currentSearchQuery}&pageNumber={_currentPageNumber}";
 
