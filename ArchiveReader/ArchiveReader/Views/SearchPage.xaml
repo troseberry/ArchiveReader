@@ -16,24 +16,54 @@
                        Placeholder="Search tag..." 
                        PlaceholderColor ="#ededed"
                        TextColor="#ededed"
-                       Margin="0" />
-            
+                       Margin="0" 
+                       SearchButtonPressed="SearchBar_SearchButtonPressed"/>
+            <StackLayout Orientation="Horizontal" Padding="25, 10, 25, 0">
+                <Button x:Name="sortFilterButton"
+                        Text="Sort &amp; Filter"
+                        IsEnabled="False"
+                        HorizontalOptions="Start"
+                        Clicked="SortFilterButton_Clicked"/>
+
+                <Button x:Name="previousPageButton"
+                        IsEnabled="False"
+                        Text="Prev" 
+                        HorizontalOptions="EndAndExpand"
+                        Clicked="PrevButton_Clicked"/>
+                <Label x:Name="currentPageNumberLabel"
+                       Text="#" 
+                       VerticalTextAlignment="Center" 
+                       HorizontalTextAlignment="Center" 
+                       FontSize="18" 
+                       BackgroundColor="#404040" 
+                       WidthRequest="50"/>
+                <Button x:Name="nextPageButton"
+                        Text="Next"
+                        Clicked="NextButton_Clicked"/>
+            </StackLayout>
             <!-- <Label x:Name="resultsLabel"/> -->
-            <Button Text="Sort &amp; Filter" 
-                    HorizontalOptions="Start" 
-                    WidthRequest="150" 
-                    Margin="15, 5, 0, 0"
-                    Pressed="SortFilterButton_Pressed"/>
+
+            <StackLayout>
+                <AbsoluteLayout>
+                    <ActivityIndicator x:Name="loadingActivityIndicator"
+                                       AbsoluteLayout.LayoutBounds=".5, .5, .25, .25"
+                                       AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"/>
+                    <ListView x:Name="resultsListView"
+                              AbsoluteLayout.LayoutBounds=".5, .5, 1, 1"
+                              AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"
+                              HasUnevenRows="true"
+                              ItemSelected="ResultsListView_ItemSelected"
+                              ItemTapped="ResultsListView_ItemTapped" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:WorkDataTemplate/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </AbsoluteLayout>
+                
+            </StackLayout>
             
-            <ListView x:Name="resultsListView"  HasUnevenRows="true"
-                      ItemSelected="ResultsListView_ItemSelected"
-                      ItemTapped="ResultsListView_ItemTapped" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <local:WorkDataTemplate/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

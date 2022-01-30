@@ -32,27 +32,27 @@
                         <Label Text="Ratings" FontSize="18" Padding="20, 0"/>
                         <StackLayout Padding="30, 0">
                             <StackLayout Orientation="Horizontal">
-                                <CheckBox x:Name="generalRatingIncludeCheckbox"/>
+                                <CheckBox x:Name="generalRatingIncludeCheckbox" CheckedChanged="RatingsIncludeCheckbox_CheckedChanged"/>
                                 <Label Text="General Audiences" VerticalTextAlignment="Center" />
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal">
-                                <CheckBox x:Name="teenRatingIncludeCheckbox"/>
+                                <CheckBox x:Name="teenRatingIncludeCheckbox" CheckedChanged="RatingsIncludeCheckbox_CheckedChanged"/>
                                 <Label Text="Teen And Up Audiences" VerticalTextAlignment="Center" />
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal">
-                                <CheckBox x:Name="matureRatingIncludeCheckbox"/>
+                                <CheckBox x:Name="matureRatingIncludeCheckbox" CheckedChanged="RatingsIncludeCheckbox_CheckedChanged"/>
                                 <Label Text="Mature" VerticalTextAlignment="Center" />
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal">
-                                <CheckBox x:Name="explicitRatingIncludeCheckbox"/>
+                                <CheckBox x:Name="explicitRatingIncludeCheckbox" CheckedChanged="RatingsIncludeCheckbox_CheckedChanged"/>
                                 <Label Text="Explicit" VerticalTextAlignment="Center" />
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal">
-                                <CheckBox x:Name="noRatingIncludeCheckbox"/>
+                                <CheckBox x:Name="noRatingIncludeCheckbox" CheckedChanged="RatingsIncludeCheckbox_CheckedChanged"/>
                                 <Label Text="Not Rated" VerticalTextAlignment="Center" />
                             </StackLayout>
                         </StackLayout>
@@ -239,15 +239,15 @@
                     <StackLayout>
                         <Label Text="Crossovers" FontSize="24"/>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox x:Name="includeCrossoversCheckbox"/>
+                            <CheckBox x:Name="includeCrossoversCheckbox" CheckedChanged="CrossoverCheckbox_CheckedChanged"/>
                             <Label Text="Include Crossovers" VerticalTextAlignment="Center" />
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox x:Name="excludeCrossoversCheckbox"/>
+                            <CheckBox x:Name="excludeCrossoversCheckbox" CheckedChanged="CrossoverCheckbox_CheckedChanged"/>
                             <Label Text="Exclude Crossovers" VerticalTextAlignment="Center" />
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox x:Name="onlyCrossoversCheckbox"/>
+                            <CheckBox x:Name="onlyCrossoversCheckbox" CheckedChanged="CrossoverCheckbox_CheckedChanged"/>
                             <Label Text="Show Only Crossovers" VerticalTextAlignment="Center" />
                         </StackLayout>
                     </StackLayout>
@@ -257,15 +257,15 @@
                     <StackLayout>
                         <Label Text="Completion Status" FontSize="24"/>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox x:Name="allWorksCompletionCheckbox"/>
+                            <CheckBox x:Name="allWorksCompletionCheckbox" CheckedChanged="CompletionCheckbox_CheckedChanged"/>
                             <Label Text="All Works" VerticalTextAlignment="Center" />
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox x:Name="completeWorksCompletionCheckbox"/>
+                            <CheckBox x:Name="completeWorksCompletionCheckbox" CheckedChanged="CompletionCheckbox_CheckedChanged"/>
                             <Label Text="Complete Works Only" VerticalTextAlignment="Center" />
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox x:Name="inProgressWorksCompletionCheckbox"/>
+                            <CheckBox x:Name="inProgressWorksCompletionCheckbox" CheckedChanged="CompletionCheckbox_CheckedChanged"/>
                             <Label Text="Works In Progress Only" VerticalTextAlignment="Center" />
                         </StackLayout>
                     </StackLayout>
@@ -303,7 +303,7 @@
             </ScrollView>
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0, 15">
                 <Button Text="Cancel" WidthRequest="150" Clicked="CancelButton_Clicked"/>
-                <Button Text="Sort and Filter" WidthRequest="150" />
+                <Button Text="Sort and Filter" WidthRequest="150" Clicked="SortFilterButton_Clicked" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
