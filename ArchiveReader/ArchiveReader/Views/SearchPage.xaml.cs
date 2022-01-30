@@ -112,7 +112,9 @@ namespace ArchiveReader.Views
 
         private async Task<bool> RunAPICall()
         {
+            if(noResultsLabel.IsVisible) noResultsLabel.IsVisible = false;
             resultsListView.ItemsSource = new List<Work>();
+
             try
             {
                 Debug.WriteLine("API Path: " + _apiFunctionPath);
@@ -122,6 +124,13 @@ namespace ArchiveReader.Views
                 {
                     _resultString = await response.Content.ReadAsStringAsync();
                     List<Work> outputWork = JsonSerializer.Deserialize<List<Work>>(_resultString);
+
+                    if (outputWork.Count <= 0)
+                    {
+                        noResultsLabel.IsVisible = true;
+                        return false;
+                    }
+
                     foreach(Work w in outputWork)
                     {
                         w.GenerateExtraInfo();
@@ -155,7 +164,7 @@ namespace ArchiveReader.Views
             await RunAPICall();
 
             loadingActivityIndicator.IsRunning = false;
-            if (!sortFilterButton.IsEnabled) sortFilterButton.IsEnabled = true;
+            if (!sortFilterButton.IsEnabled && !noResultsLabel.IsVisible) sortFilterButton.IsEnabled = true;
         }
 
         private void ResultsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -205,6 +214,15 @@ namespace ArchiveReader.Views
             if (_currentPageNumber > 1) previousPageButton.IsEnabled = true;
 
             loadingActivityIndicator.IsRunning = false;
+        }
+
+        private async void ResultsListView_Refreshing(object sender, EventArgs e)
+        {
+            resultsListView.IsRefreshing = true;
+
+            await RunAPICall();
+
+            resultsListView.IsRefreshing = false;
         }
     }
 }

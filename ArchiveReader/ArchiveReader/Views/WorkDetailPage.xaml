@@ -4,25 +4,28 @@
              x:Class="ArchiveReader.Views.WorkDetailPage"
              Title="Work Details">
     <ContentPage.Content>
-        <StackLayout Padding="20" x:Name="DetailsStackLayout">
-            <Label Text="{Binding lastUpdated}" HorizontalTextAlignment="End" />
-            <Label Text="{Binding title}" FontAttributes="Bold" FontSize="18"/>
-            <Label Text="{Binding author}" />
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0, 20">
-                <Button Text="Read" Pressed="ReadButton_Pressed"/>
-                <Button Text="Save" Pressed="SaveButton_Pressed"/>
+        <ScrollView>
+            <StackLayout Padding="20" x:Name="DetailsStackLayout">
+                <Label Text="{Binding lastUpdated}" HorizontalTextAlignment="End" />
+                <Label Text="{Binding title}" FontAttributes="Bold" FontSize="18"/>
+                <Label Text="{Binding author}" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0, 20">
+                    <Button Text="Read" Pressed="ReadButton_Pressed"/>
+                    <Button Text="Save" Pressed="SaveButton_Pressed"/>
+                </StackLayout>
+
+                <!-- visual divider here -->
+
+                <Label Text="{Binding fandoms}" />
+                <Label Text="{Binding tags}" />
+                <Label Text="{Binding summary}" />
+
+                <!-- visual divider here -->
+
+                <Label Text="{Binding AllStats}" />
+
             </StackLayout>
-            
-            <!-- visual divider here -->
-
-            <Label Text="{Binding fandoms}" />
-            <Label Text="{Binding tags}" />
-            <Label Text="{Binding summary}" />
-
-            <!-- visual divider here -->
-
-            <Label Text="{Binding AllStats}" />
-
-        </StackLayout>
+        </ScrollView>
+        
     </ContentPage.Content>
 </ContentPage>

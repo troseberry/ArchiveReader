@@ -45,21 +45,31 @@
 
             <StackLayout>
                 <AbsoluteLayout>
+                    <Label x:Name="noResultsLabel"
+                           IsVisible="false"
+                           Padding="10"
+                           Text="No results found. You may want to edit your search to make it less specific."
+                           AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                           AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"/>
                     <ActivityIndicator x:Name="loadingActivityIndicator"
                                        AbsoluteLayout.LayoutBounds=".5, .5, .25, .25"
                                        AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"/>
+
                     <ListView x:Name="resultsListView"
                               AbsoluteLayout.LayoutBounds=".5, .5, 1, 1"
                               AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"
                               HasUnevenRows="true"
                               ItemSelected="ResultsListView_ItemSelected"
-                              ItemTapped="ResultsListView_ItemTapped" >
+                              ItemTapped="ResultsListView_ItemTapped"
+                              IsPullToRefreshEnabled="true"
+                              Refreshing="ResultsListView_Refreshing">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <local:WorkDataTemplate/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+
                 </AbsoluteLayout>
                 
             </StackLayout>

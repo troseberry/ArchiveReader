@@ -86,7 +86,7 @@ namespace ArchiveReader.Views
             //Debug.WriteLine("SetUpReader");
         }
 
-        //change task type to bool to return success?
+        //need to remove links for series from body and give alternative navigation method
         private async Task<bool> HandleWorkBody(int chapterNumber)
         {
             _apiFunctionPath = $"GetWorkBodyContentForChapter?workId={_currentWork.id}&lastId={_currentWork.latestChapterId}&chapterNumber={chapterNumber}";
@@ -103,6 +103,7 @@ namespace ArchiveReader.Views
 
                     contentString = contentString.Replace(@"\n", string.Empty);
                     contentString = contentString.Replace(@"\", string.Empty);
+                    contentString = contentString.Substring(1, contentString.Length - 2 );
 
                     _htmlSource.Html = contentString;
 
