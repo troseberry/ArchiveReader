@@ -8,6 +8,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using ArchiveReader.Models;
+using ArchiveReader.Data;
+
 using System.Text.Json;
 using System.Diagnostics;
 
@@ -41,8 +43,9 @@ namespace ArchiveReader.Views
 
         private async void SaveButton_Pressed(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new WorkDetailPage());
-            await Navigation.PushAsync(new ReaderPage());
+            LibraryDatabase db = await LibraryDatabase.Instance;
+
+            await db.SaveWorkAsync(currentWork);
         }
     }
 }

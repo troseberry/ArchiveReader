@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Diagnostics;
+using SQLite;
 
 namespace ArchiveReader.Models
 {
     public class Work
     {
+        [PrimaryKey, AutoIncrement]
+        public int dbID { get; set; }
+
         public string id { get; set; }
         public string title { get; set; }
         public string author { get; set; }
@@ -33,85 +37,99 @@ namespace ArchiveReader.Models
 
         public string latestChapterId { get; set; }
 
+        [Ignore]
+        public string AllStats 
+        {
+            get 
+            {
+                string output = "";
+                #region Func
+                if (!string.IsNullOrWhiteSpace(language))
+                {
+                    output += $"Language: {language}";
+                }
 
-        public string AllStats { get; set; }
+                if (!string.IsNullOrWhiteSpace(wordCount))
+                {
+                    output += $" | Words: {wordCount}";
+                }
+
+                if (!string.IsNullOrWhiteSpace(chapterCount))
+                {
+                    output += $" | Chapters: {chapterCount}";
+                }
+
+                if (!string.IsNullOrWhiteSpace(collections))
+                {
+                    output += $" | Collections: {collections}";
+                }
+
+                if (!string.IsNullOrWhiteSpace(comments))
+                {
+                    output += $" | Comments: {comments}";
+                }
+
+                if (!string.IsNullOrWhiteSpace(kudos))
+                {
+                    output += $" | Kudos: {kudos}";
+                }
+
+                if (!string.IsNullOrWhiteSpace(bookmarks))
+                {
+                    output += $" | Bookmarks: {bookmarks}";
+                }
+
+                if (!string.IsNullOrWhiteSpace(hits))
+                {
+                    output += $" | Hits: {hits}";
+                }
+                #endregion
+                return output; 
+            }
+        }
+
+        [Ignore]
         public string ReadingStats { get; set; }
-        public string[] RequiredTagsArray { get; set; }
+
+        [Ignore]
+        public string[] RequiredTagsArray
+        {
+            get
+            {
+                string[] output = new string[4];
+
+                string[] reqStrings = requiredTags.Split('[');
+                reqStrings = reqStrings.Skip(1).ToArray();
+
+                for (int i = 0; i < reqStrings.Length; i++)
+                {
+                    string result = reqStrings[i];
+                    if (result.Contains("],"))
+                    {
+                        result = result.Replace("],", "");
+                    }
+                    else
+                    {
+                        result = result.Replace("]", "");
+                    }
+
+                    result = result.Trim();
+                    output[i] = GetReqTagImageForString(result, i);
+                }
+
+                return output;
+            }
+        }
 
         
          public Work()
         {
-            
+
         }
 
         public void GenerateExtraInfo()
         {
-            #region All Stats
-            if (!string.IsNullOrWhiteSpace(language))
-            {
-                AllStats += $"Language: {language}";
-            }
 
-            if (!string.IsNullOrWhiteSpace(wordCount))
-            {
-                AllStats += $" | Words: {wordCount}";
-            }
-
-            if (!string.IsNullOrWhiteSpace(chapterCount))
-            {
-                AllStats += $" | Chapters: {chapterCount}";
-            }
-
-            if (!string.IsNullOrWhiteSpace(collections))
-            {
-                AllStats += $" | Collections: {collections}";
-            }
-
-            if (!string.IsNullOrWhiteSpace(comments))
-            {
-                AllStats += $" | Comments: {comments}";
-            }
-
-            if (!string.IsNullOrWhiteSpace(kudos))
-            {
-                AllStats += $" | Kudos: {kudos}";
-            }
-
-            if (!string.IsNullOrWhiteSpace(bookmarks))
-            {
-                AllStats += $" | Bookmarks: {bookmarks}";
-            }
-
-            if (!string.IsNullOrWhiteSpace(hits))
-            {
-                AllStats += $" | Hits: {hits}";
-            }
-            #endregion
-
-            #region Required Tags Array
-            RequiredTagsArray = new string[4];
-
-            string[] reqStrings = requiredTags.Split('[');
-            reqStrings = reqStrings.Skip(1).ToArray();
-
-            for (int i = 0; i < reqStrings.Length; i++)
-            {
-                string result = reqStrings[i];
-                if (result.Contains("],"))
-                {
-                    result = result.Replace("],", "");
-                }
-                else
-                {
-                    result = result.Replace("]", "");
-                }
-
-                result = result.Trim();
-                RequiredTagsArray[i] = GetReqTagImageForString(result, i);
-                //string e = GetReqTagImageForString(result, i);
-                //Debug.WriteLine(e);
-            }
-            #endregion
         }
 
         string GetReqTagImageForString(string tagStr, int index)

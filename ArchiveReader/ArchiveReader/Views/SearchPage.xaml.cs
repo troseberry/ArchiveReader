@@ -133,11 +133,13 @@ namespace ArchiveReader.Views
                         noResultsLabel.IsVisible = true;
                         return false;
                     }
-
+                    
+                    /*
                     foreach(Work w in outputWork)
                     {
                         w.GenerateExtraInfo();
                     }
+                    */
 
                     resultsListView.ItemsSource = outputWork;
                     currentPageNumberLabel.Text = _currentPageNumber.ToString();

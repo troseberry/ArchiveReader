@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ArchiveReader.Views.LibraryPage"
              xmlns:vm="clr-namespace:ArchiveReader.ViewModels"
+             xmlns:local ="clr-namespace:ArchiveReader.DataTemplates"
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -11,7 +12,18 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <Button Margin="20" Text="Resume Reading" HeightRequest="150" />
+            <Button Margin="20" Text="Resume Reading" HeightRequest="50" />
+
+            <ListView x:Name="worksListView"
+                      HasUnevenRows="true"
+                      ItemSelected="WorksListView_ItemSelected"
+                      ItemTapped="WorksListView_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <local:WorkDataTemplate/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
