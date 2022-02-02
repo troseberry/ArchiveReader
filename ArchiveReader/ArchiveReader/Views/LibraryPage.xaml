@@ -12,7 +12,14 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <Button Margin="20" Text="Resume Reading" HeightRequest="50" />
+            <StackLayout Orientation="Horizontal" HeightRequest="40" BackgroundColor="{x:StaticResource DefaultForeground}">
+                <Image Source="icon_resume_white.png" HorizontalOptions="EndAndExpand" />
+                <Image Source="icon_sortfilter_white.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SortFilterButtonTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
 
             <ListView x:Name="worksListView"
                       HasUnevenRows="true"

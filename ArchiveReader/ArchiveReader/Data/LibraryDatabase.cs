@@ -11,6 +11,7 @@ namespace ArchiveReader.Data
     public class LibraryDatabase
     {
         private static SQLiteAsyncConnection _database;
+        public EventHandler<Work> WorkAddedEvent;
 
         public static readonly AsyncLazy<LibraryDatabase> Instance = new AsyncLazy<LibraryDatabase>(async () =>
         {
@@ -42,14 +43,19 @@ namespace ArchiveReader.Data
 
         public Task<int> SaveWorkAsync(Work work)
         {
+            Task<int> outValue;
+
             if (work.dbID != 0)
             {
-                return _database.UpdateAsync(work);
+                outValue = _database.UpdateAsync(work);
             }
             else
             {
-                return _database.InsertAsync(work);
+                outValue =  _database.InsertAsync(work);
             }
+
+            WorkAddedEvent?.Invoke(this, work);
+            return outValue;
         }
 
         public Task<int> DeleteWorkAsync(Work work)

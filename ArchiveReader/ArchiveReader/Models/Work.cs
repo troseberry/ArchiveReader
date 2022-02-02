@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Diagnostics;
+
 using SQLite;
+
+using ArchiveReader.Enums;
 
 namespace ArchiveReader.Models
 {
@@ -220,6 +223,39 @@ namespace ArchiveReader.Models
              this.hits = hits;
          }
          */
+
+        public string GetParameterForSort(SortMethod method)
+        {
+            switch(method)
+            {
+                //case SortMethod.AddedDate:
+                    //return "";
+                case SortMethod.Author:
+                    return author;
+                case SortMethod.Bookmarks:
+                    return bookmarks;
+                case SortMethod.ChapterCount:
+                    return chapterCount;
+                case SortMethod.Comments:
+                    return comments;
+                case SortMethod.Fandom:
+                    return fandoms;
+                case SortMethod.Hits:
+                    return hits;
+                case SortMethod.Kudos:
+                    return kudos;
+                case SortMethod.Language:
+                    return language;
+                case SortMethod.RevisedDate:
+                    return lastUpdated;
+                case SortMethod.Title:
+                    return title;
+                case SortMethod.WordCount:
+                    return wordCount;
+                default:
+                    return "";
+            }
+        }
 
         public override string ToString()
         {

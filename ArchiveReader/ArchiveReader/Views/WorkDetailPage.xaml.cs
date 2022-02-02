@@ -22,7 +22,6 @@ namespace ArchiveReader.Views
         public WorkDetailPage()
         {
             InitializeComponent();
-            Debug.WriteLine("Init WorkDetailPage");
         }
 
         public WorkDetailPage(Work workToDisplay)
@@ -34,11 +33,8 @@ namespace ArchiveReader.Views
         }
 
         private async void ReadButton_Pressed(object sender, EventArgs e)
-
         {
             await Navigation.PushAsync(new ReaderPage(currentWork));
-            //await Navigation.PushAsync(new ReaderPage());
-            //GoToReader();
         }
 
         private async void SaveButton_Pressed(object sender, EventArgs e)

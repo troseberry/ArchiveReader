@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,8 +8,10 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using ArchiveReader.Models;
+using ArchiveReader.Enums;
 using ArchiveReader.Data;
+using ArchiveReader.Models;
+using ArchiveReader.Util;
 
 namespace ArchiveReader.Views
 {
@@ -17,8 +20,8 @@ namespace ArchiveReader.Views
     {
         private LibraryDatabase _libraryDatabase;
 
-        // this should be an ObservableCollection so it can be updated while viewing library (like if a delete happens)
-        private List<Work> _libraryWorks;
+        private List<Work> _databaseWorks;
+        private ObservableCollection<Work> _worksObservableCollection;
 
         public LibraryPage()
         {
@@ -26,14 +29,21 @@ namespace ArchiveReader.Views
 
             SetupDatabaseConnection();
         }
-
         private async void SetupDatabaseConnection()
         {
             _libraryDatabase = await LibraryDatabase.Instance;
+            _libraryDatabase.WorkAddedEvent += LibraryDatabaseAddedTo;
 
-            _libraryWorks = await _libraryDatabase.GetWorksAsync();
+            _databaseWorks = await _libraryDatabase.GetWorksAsync();
 
-            worksListView.ItemsSource = _libraryWorks;
+            _worksObservableCollection = new ObservableCollection<Work>(_databaseWorks);
+            worksListView.ItemsSource = _worksObservableCollection;
+        }
+
+        private async void LibraryDatabaseAddedTo(object sender, Work arg)
+        {
+            _databaseWorks = await _libraryDatabase.GetWorksAsync();
+            _worksObservableCollection.Add(arg);                        // don't need to update itemssource for change to take affect
         }
 
         private void WorksListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -44,7 +54,6 @@ namespace ArchiveReader.Views
         private async void WorksListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             Work selectedWork = e.Item as Work;
-            //await Navigation.PushAsync(new ReaderPage(selectedWork));
 
             string response = await DisplayActionSheet(selectedWork.title, "Cancel", "Delete", new string[] { "Read" });
 
@@ -55,7 +64,35 @@ namespace ArchiveReader.Views
                     break;
                 case "Delete":
                     await _libraryDatabase.DeleteWorkAsync(selectedWork);
+                    _worksObservableCollection.Remove(selectedWork);            // don't need to update itemssource for change to take affect
                     break;
+            }
+        }
+    
+        private async void SortFilterButtonTapped(object sender, EventArgs e)
+        {
+            string[] sortOptions = 
+            {
+                "Updated Date",
+                "Title",
+                "Author",
+                "Fandom",
+                "Word Count",
+                "Chapter Count",
+                "Comments",
+                "Kudos",
+                "Bookmarks",
+                "Hits"
+            };
+
+            string response = await DisplayActionSheet("Sort Library", "Cancel", null, sortOptions);
+
+            SortMethod toSortBy = LibraryHelper.StringToSortMethod(response);
+
+            if (toSortBy != SortMethod.None)
+            {
+                _worksObservableCollection = new ObservableCollection<Work>(LibraryHelper.SortWorksBySortMethod(_worksObservableCollection.ToList(), toSortBy));
+                worksListView.ItemsSource = _worksObservableCollection;
             }
         }
     }
