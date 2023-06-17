@@ -34,6 +34,20 @@ namespace ArchiveReader.Util
                         return result;
                     });
                     break;
+
+                case SortMethod.Author:
+                case SortMethod.Fandom:
+                case SortMethod.Language:
+                case SortMethod.Title:
+                    sortedWorks.Sort((Work work01, Work work02) =>
+                    {
+                        var workOneParam = work01.GetParameterForSort(sortMethod);
+                        var workTwoParam = work02.GetParameterForSort(sortMethod);
+
+                        return workOneParam.CompareTo(workTwoParam);
+
+                    });
+                    break;
             }
 
             return sortedWorks;

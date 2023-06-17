@@ -10,9 +10,9 @@
             <Color x:Key="Primary">#2196F3</Color>
             <Color x:Key="DefaultBackground">#212121</Color>
             <Color x:Key="DefaultForeground">#404040</Color>
-            
+
             <Style TargetType="Button">
-                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="TextColor" Value="#dddddd"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
@@ -34,7 +34,8 @@
                 <Setter Property="BackgroundColor" Value="#212121" />
             </Style>
             <Style TargetType="Label">
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="TextColor" Value="#dddddd"/>
+                <Setter Property="FontFamily" Value="OpenSans-Regular" />
             </Style>
         </ResourceDictionary>        
     </Application.Resources>

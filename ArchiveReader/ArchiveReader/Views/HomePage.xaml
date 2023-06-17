@@ -8,6 +8,12 @@
     <ContentPage.BindingContext>
         <vm:HomeViewModel />
     </ContentPage.BindingContext>
+
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{Binding Title}" FontSize="19" VerticalOptions="CenterAndExpand" FontFamily="OpenSans-Bold" CharacterSpacing="1"/>
+        </StackLayout>
+    </Shell.TitleView>
     
     <ContentPage.Content>
         <StackLayout>
