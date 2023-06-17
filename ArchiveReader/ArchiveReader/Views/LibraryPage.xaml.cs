@@ -73,16 +73,17 @@ namespace ArchiveReader.Views
         {
             string[] sortOptions = 
             {
-                "Updated Date",
-                "Title",
                 "Author",
+                "Title",
                 "Fandom",
+                "Date Posted",
+                "Date Updated",
                 "Word Count",
                 "Chapter Count",
-                "Comments",
+                "Hits",
                 "Kudos",
+                "Comments",
                 "Bookmarks",
-                "Hits"
             };
 
             string response = await DisplayActionSheet("Sort Library", "Cancel", null, sortOptions);

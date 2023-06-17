@@ -16,6 +16,7 @@ namespace ArchiveReader.Util
 
             switch(sortMethod)
             {
+                // Ints
                 case SortMethod.WordCount:
                 case SortMethod.Kudos:
                 case SortMethod.Hits:
@@ -23,18 +24,15 @@ namespace ArchiveReader.Util
                 case SortMethod.Comments:
                     sortedWorks.Sort((Work work01, Work work02) =>
                     {
-                        // Ascending Sort
-                        //return work01.GetParameterForSort(sortMethod).CompareTo(work02.GetParameterForSort(sortMethod));
-
                         int workOneStat = !String.IsNullOrWhiteSpace(work01.GetParameterForSort(sortMethod)) ? int.Parse(work01.GetParameterForSort(sortMethod)) : 0;
                         int workTwoStat = !String.IsNullOrWhiteSpace(work02.GetParameterForSort(sortMethod)) ? int.Parse(work02.GetParameterForSort(sortMethod)) : 0;
 
-                        int result = workOneStat == workTwoStat ? 0 :
-                        workOneStat > workTwoStat ? -1 : 1;
-                        return result;
+                        int comp = workOneStat.CompareTo(workTwoStat);
+                        return comp * -1;
                     });
                     break;
 
+                // Strings
                 case SortMethod.Author:
                 case SortMethod.Fandom:
                 case SortMethod.Language:
@@ -48,6 +46,19 @@ namespace ArchiveReader.Util
 
                     });
                     break;
+
+                // Dates
+                case SortMethod.AddedDate:
+                case SortMethod.RevisedDate:
+                    sortedWorks.Sort((Work work01, Work work02) =>
+                    {
+                        var workOneParam = DateTime.Parse(work01.GetParameterForSort(sortMethod));
+                        var workTwoParam = DateTime.Parse(work02.GetParameterForSort(sortMethod));
+
+                        int comp = workOneParam.CompareTo(workTwoParam);
+                        return comp * -1;
+                    });
+                    break;
             }
 
             return sortedWorks;
@@ -57,7 +68,7 @@ namespace ArchiveReader.Util
         {
             switch(sortString)
             {
-                case "Updated Date":
+                case "Date Updated":
                     return SortMethod.RevisedDate;
                 case "Title":
                     return SortMethod.Title;
@@ -77,6 +88,8 @@ namespace ArchiveReader.Util
                     return SortMethod.Hits;
                 case "Comments":
                     return SortMethod.Comments;
+                case "Published Date":
+                    return SortMethod.AddedDate;
                 default:
                     return SortMethod.None;
             }
