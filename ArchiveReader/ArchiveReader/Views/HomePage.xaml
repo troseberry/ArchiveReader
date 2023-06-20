@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ArchiveReader.Views.HomePage"
              xmlns:vm="clr-namespace:ArchiveReader.ViewModels"
+             xmlns:local ="clr-namespace:ArchiveReader.DataTemplates"
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -12,16 +13,33 @@
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal">
             <Label Text="{Binding Title}" FontSize="19" VerticalOptions="CenterAndExpand" FontAttributes="Bold" CharacterSpacing="1"/>
+            <Image Source="icon_vertical_dots.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
         </StackLayout>
     </Shell.TitleView>
     
     <ContentPage.Content>
         <StackLayout>
 
-            <StackLayout Padding="10" VerticalOptions="FillAndExpand">
-                <Label Text="Resume Reading" FontSize="18" FontAttributes="Bold"/>
+            <StackLayout Padding="10">
 
-                <StackLayout Orientation="Horizontal">
+                <StackLayout>
+                    <Label Text="Resume Reading" FontSize="18" FontAttributes="Bold"/>
+
+                    <ListView x:Name="recentlyReadListView"
+                              HasUnevenRows="true"
+                              ItemSelected="RecentlyReadListView_ItemSelected"
+                              ItemTapped="RecentlyReadListView_ItemTapped"
+                              HeightRequest="100">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:WorkDataTemplateNoDate/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                
+                
+                <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand">
                     <Label Text="Recent Updates"  FontSize="18" FontAttributes="Bold"/>
                     <Image Source="icon_right_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
                 </StackLayout>

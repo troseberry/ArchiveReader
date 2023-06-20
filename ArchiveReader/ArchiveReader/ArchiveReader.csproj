@@ -43,6 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="DataTemplates\WorkDataTemplateNoDate.xaml.cs">
+      <DependentUpon>WorkDataTemplateNoDate.xaml</DependentUpon>
+    </Compile>
     <Compile Update="DataTemplates\WorkDataTemplateWithSummary.xaml.cs">
       <DependentUpon>WorkDataTemplateWithSummary.xaml</DependentUpon>
     </Compile>

@@ -12,63 +12,193 @@
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal">
             <Label Text="{Binding Title}" FontSize="19" VerticalOptions="CenterAndExpand" FontAttributes="Bold" CharacterSpacing="1"/>
+            <Image Source="icon_vertical_dots.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
         </StackLayout>
     </Shell.TitleView>
     
     <ContentPage.Content>
-        <StackLayout>
-            <Label Padding="20,20,0,0" Text="Find your favorites" FontSize="18" FontAttributes="Bold" TextColor="White"/>
+        <ScrollView>
+            <StackLayout>
+                <Label Padding="0, 20, 0, 0" Text="Find Your Favorites" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center"/>
 
-            <Grid Padding="20, 5, 20, 20" ColumnSpacing="10" RowSpacing="10">
-                <StackLayout Grid.Row="0" Grid.Column="0">
-                    <Button Text="All Fandoms" HeightRequest="55"/>
+                <Line BackgroundColor="{StaticResource PrimaryAccent}" HeightRequest="2" Margin="140, 5" />
+
+                <Label HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                Text="Browse the archive by fandom and find new and &#10; interesting fanworks to read and enjoy."  />
+
+                <!-- Fandoms -->
+                <StackLayout Padding="0, 30, 0, 0">
+
+                    <!-- Anime & Manga -->
+                    <StackLayout Padding="10, 0"
+                                 x:Name="animeMangaFandom">
+                        <StackLayout Orientation="Horizontal" Padding="0, 10">
+                            <Label Text="Anime &amp; Manga" FontSize="16" />
+                            <Image Source="icon_right_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+                        </StackLayout>
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FandomSelected" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <!-- Books & Literature -->
+                    <StackLayout Padding="10, 0"
+                                 x:Name="booksLitFandom">
+                        <StackLayout Orientation="Horizontal" Padding="0, 10">
+                            <Label Text="Books &amp; Literature" FontSize="16" />
+                            <Image Source="icon_right_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+                        </StackLayout>
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FandomSelected" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <!-- Cartoons, Comics, &amp; Graphic Novels -->
+                    <StackLayout Padding="10, 0"
+                                 x:Name="cartoonsFandom">
+                        <StackLayout Orientation="Horizontal" Padding="0, 10">
+                            <Label Text="Cartoons, Comics, &amp; Graphic Novels" FontSize="16" />
+                            <Image Source="icon_right_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+                        </StackLayout>
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FandomSelected" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <!-- Celebrities &amp; Real People -->
+                    <StackLayout Padding="10, 0"
+                                 x:Name="celebritiesFandom">
+                        <StackLayout Orientation="Horizontal" Padding="0, 10">
+                            <Label Text="Celebrities &amp; Real People" FontSize="16" />
+                            <Image Source="icon_right_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+                        </StackLayout>
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FandomSelected" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <!-- Movies -->
+                    <StackLayout Padding="10, 0"
+                                 x:Name="moviesFandom">
+                        <StackLayout Orientation="Horizontal" Padding="0, 10">
+                            <Label Text="Movies" FontSize="16" />
+                            <Image Source="icon_right_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+                        </StackLayout>
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FandomSelected" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <!-- Music & Bands -->
+                    <StackLayout Padding="10, 0"
+                                 x:Name="musicBandsFandom">
+                        <StackLayout Orientation="Horizontal" Padding="0, 10">
+                            <Label Text="Music &amp; Bands" FontSize="16" />
+                            <Image Source="icon_right_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+                        </StackLayout>
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FandomSelected" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <!-- Other Media -->
+                    <StackLayout Padding="10, 0"
+                                 x:Name="otherMediaFandom">
+                        <StackLayout Orientation="Horizontal" Padding="0, 10">
+                            <Label Text="Other Media" FontSize="16" />
+                            <Image Source="icon_right_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+                        </StackLayout>
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FandomSelected" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <!-- Theater -->
+                    <StackLayout Padding="10, 0"
+                                 x:Name="theaterFandom">
+                        <StackLayout Orientation="Horizontal" Padding="0, 10">
+                            <Label Text="Theater" FontSize="16" />
+                            <Image Source="icon_right_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+                        </StackLayout>
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FandomSelected" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <!-- TV Shows -->
+                    <StackLayout Padding="10, 0"
+                                 x:Name="tvShowsFandom">
+                        <StackLayout Orientation="Horizontal" Padding="0, 10">
+                            <Label Text="TV Shows" FontSize="16" />
+                            <Image Source="icon_right_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+                        </StackLayout>
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FandomSelected" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <!-- Video Games -->
+                    <StackLayout Padding="10, 0"
+                                 x:Name="videoGamesFandom">
+                        <StackLayout Orientation="Horizontal" Padding="0, 10">
+                            <Label Text="Video Games" FontSize="16" />
+                            <Image Source="icon_right_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+                        </StackLayout>
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FandomSelected" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <!-- Uncategorized -->
+                    <StackLayout Padding="10, 0"
+                                 x:Name="uncategorizedFandom">
+                        <StackLayout Orientation="Horizontal" Padding="0, 10">
+                            <Label Text="Uncategorized Fandoms" FontSize="16" />
+                            <Image Source="icon_right_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+                        </StackLayout>
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FandomSelected" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
                 </StackLayout>
 
-                <StackLayout Grid.Row="0" Grid.Column="1">
-                    <Button Text="Anime &amp; Manga" HeightRequest="55"/>
-                </StackLayout>
-
-                <StackLayout Grid.Row="1" Grid.Column="0">
-                    <Button Text="Books &amp; Literature" HeightRequest="55"/>
-                </StackLayout>
-
-                <StackLayout Grid.Row="1" Grid.Column="1">
-                    <Button Text="Cartoons, Comics, &amp; Graphic Novels" HeightRequest="55"/>
-                </StackLayout>
-
-                <StackLayout Grid.Row="2" Grid.Column="0">
-                    <Button Text="Celebrities &amp; Real People" HeightRequest="55"/>
-                </StackLayout>
-
-                <StackLayout Grid.Row="2" Grid.Column="1">
-                    <Button Text="Movies" HeightRequest="55"/>
-                </StackLayout>
-
-                <StackLayout Grid.Row="3" Grid.Column="0">
-                    <Button Text="Music &amp; Bands" HeightRequest="55"/>
-                </StackLayout>
-
-                <StackLayout Grid.Row="3" Grid.Column="1">
-                    <Button Text="Other Media" HeightRequest="55"/>
-                </StackLayout>
-
-                <StackLayout Grid.Row="4" Grid.Column="0">
-                    <Button Text="Theater" HeightRequest="55"/>
-                </StackLayout>
-
-                <StackLayout Grid.Row="4" Grid.Column="1">
-                    <Button Text="TV Shows" HeightRequest="55"/>
-                </StackLayout>
-
-                <StackLayout Grid.Row="5" Grid.Column="0">
-                    <Button Text="Video Games" HeightRequest="55"/>
-                </StackLayout>
-
-                <StackLayout Grid.Row="5" Grid.Column="1">
-                    <Button Text="Uncategorized Fandoms" HeightRequest="55"/>
-                </StackLayout>
-            </Grid>
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
+        
 
         
     </ContentPage.Content>

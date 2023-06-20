@@ -19,6 +19,7 @@
                     <TapGestureRecognizer Tapped="SortFilterButtonTapped" />
                 </Image.GestureRecognizers>
             </Image>
+            <Image Source="icon_vertical_dots.png" HeightRequest="30"/>
         </StackLayout>
     </Shell.TitleView>
 

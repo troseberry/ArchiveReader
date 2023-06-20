@@ -101,23 +101,26 @@ namespace ArchiveReader.Models
             {
                 string[] output = new string[4];
 
-                string[] reqStrings = requiredTags.Split('[');
-                reqStrings = reqStrings.Skip(1).ToArray();
-
-                for (int i = 0; i < reqStrings.Length; i++)
+                if (!string.IsNullOrWhiteSpace(requiredTags))
                 {
-                    string result = reqStrings[i];
-                    if (result.Contains("],"))
-                    {
-                        result = result.Replace("],", "");
-                    }
-                    else
-                    {
-                        result = result.Replace("]", "");
-                    }
+                    string[] reqStrings = requiredTags.Split('[');
+                    reqStrings = reqStrings.Skip(1).ToArray();
 
-                    result = result.Trim();
-                    output[i] = GetReqTagImageForString(result, i);
+                    for (int i = 0; i < reqStrings.Length; i++)
+                    {
+                        string result = reqStrings[i];
+                        if (result.Contains("],"))
+                        {
+                            result = result.Replace("],", "");
+                        }
+                        else
+                        {
+                            result = result.Replace("]", "");
+                        }
+
+                        result = result.Trim();
+                        output[i] = GetReqTagImageForString(result, i);
+                    }
                 }
 
                 return output;

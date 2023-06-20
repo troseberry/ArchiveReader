@@ -13,6 +13,7 @@
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal">
             <Label Text="{Binding Title}" FontSize="19" VerticalOptions="CenterAndExpand" FontAttributes="Bold" CharacterSpacing="1"/>
+            <Image Source="icon_vertical_dots.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
         </StackLayout>
     </Shell.TitleView>
     

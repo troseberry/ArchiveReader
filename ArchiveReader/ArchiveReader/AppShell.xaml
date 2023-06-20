@@ -17,7 +17,7 @@
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource DefaultBackground}" />
-                <Setter Property="Shell.ForegroundColor" Value="{StaticResource DefaultForeground}" />
+                <Setter Property="Shell.ForegroundColor" Value="{StaticResource PrimaryFont}" />
                 <Setter Property="Shell.TitleColor" Value="{StaticResource PrimaryFont}" />
                 <Setter Property="Shell.DisabledColor" Value="{StaticResource GrayedOut}" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />

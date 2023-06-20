@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArchiveReader.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,13 @@ namespace ArchiveReader.Views
         public HomePage()
         {
             InitializeComponent();
+
+            recentlyReadListView.ItemsSource = new List<Work>()
+            {
+                new Work()
+            };
         }
 
-        private void Button_Pressed(object sender, EventArgs e)
-        {
-            //Shell.Current.FlyoutIsPresented = true;
-            //NavToReader();
-            PushFilterModal();
-        }
 
         private async void NavToReader()
         {
@@ -32,6 +32,17 @@ namespace ArchiveReader.Views
         private async void PushFilterModal()
         {
             await Navigation.PushModalAsync(new SortFilterPage());
+        }
+
+        private void RecentlyReadListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            recentlyReadListView.SelectedItem = null;
+        }
+
+        private async void RecentlyReadListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            Work selectedWork = e.Item as Work;
+            await Navigation.PushAsync(new WorkDetailPage(selectedWork));
         }
     }
 }
