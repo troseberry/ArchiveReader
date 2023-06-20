@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ArchiveReader.DataTemplates.WorkDataTemplate">
+             x:Class="ArchiveReader.DataTemplates.WorkDataTemplateWithSummary">
 
     <ViewCell.View>
 
         <StackLayout>
 
             <StackLayout  Orientation="Vertical" Padding="7" >
+                
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                     <!-- Warnings -->
                     <Grid VerticalOptions="Center" ColumnSpacing="2" RowSpacing="2" HeightRequest="55" WidthRequest="55" MinimumWidthRequest="55">
@@ -29,11 +30,13 @@
 
                         <Label Text="{Binding fandoms}" Margin="0, -8, 0, 0" LineBreakMode="TailTruncation" MaxLines="1" Opacity="0.7" />
                     </StackLayout>
+
                 </StackLayout>
+
+                <Label Text="{Binding summary}" LineBreakMode="TailTruncation" MaxLines="3"/>
             </StackLayout>
 
             <Line HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" />
         </StackLayout>
-
     </ViewCell.View>
 </ViewCell>

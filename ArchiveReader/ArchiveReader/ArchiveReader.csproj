@@ -21,18 +21,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-Bold.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-BoldItalic.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-ExtraBold.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-ExtraBoldItalic.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-Italic.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-Light.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-LightItalic.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-Medium.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-MediumItalic.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-Regular.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-SemiBold.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-SemiBoldItalic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-BoldItalic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-ExtraBold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-ExtraBoldItalic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-Italic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-Light.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-LightItalic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-Medium.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-MediumItalic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-SemiBold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-SemiBoldItalic.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +40,12 @@
     <PackageReference Include="System.Text.Json" Version="6.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2291" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="DataTemplates\WorkDataTemplateWithSummary.xaml.cs">
+      <DependentUpon>WorkDataTemplateWithSummary.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

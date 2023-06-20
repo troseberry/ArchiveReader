@@ -11,13 +11,22 @@
 
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal">
-            <Label Text="{Binding Title}" FontSize="19" VerticalOptions="CenterAndExpand" FontFamily="OpenSans-Bold" CharacterSpacing="1"/>
+            <Label Text="{Binding Title}" FontSize="19" VerticalOptions="CenterAndExpand" FontAttributes="Bold" CharacterSpacing="1"/>
         </StackLayout>
     </Shell.TitleView>
     
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Filter Modal" Pressed="Button_Pressed"/>
+
+            <StackLayout Padding="10" VerticalOptions="FillAndExpand">
+                <Label Text="Resume Reading" FontSize="18" FontAttributes="Bold"/>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Recent Updates"  FontSize="18" FontAttributes="Bold"/>
+                    <Image Source="icon_right_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+                </StackLayout>
+            </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

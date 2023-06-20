@@ -12,7 +12,7 @@
 
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal">
-            <Label Text="{Binding Title}" FontSize="19" VerticalOptions="CenterAndExpand" FontFamily="OpenSans-Bold" CharacterSpacing="1"/>
+            <Label Text="{Binding Title}" FontSize="19" VerticalOptions="CenterAndExpand" FontAttributes="Bold" CharacterSpacing="1"/>
         </StackLayout>
     </Shell.TitleView>
     
@@ -87,7 +87,7 @@
                               Refreshing="ResultsListView_Refreshing">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <local:WorkDataTemplate/>
+                                <local:WorkDataTemplateWithSummary/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

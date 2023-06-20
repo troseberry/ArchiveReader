@@ -12,9 +12,9 @@
 
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal">
-            <Label Text="Library" FontSize="19" VerticalOptions="CenterAndExpand" FontFamily="OpenSans-Bold" CharacterSpacing="1"/>
-            <Image Source="icon_resume_white.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
-            <Image Source="icon_sortfilter_white.png"  HeightRequest="30">
+            <Label Text="Library" FontSize="19" VerticalOptions="CenterAndExpand" FontAttributes="Bold" CharacterSpacing="1"/>
+            <Image Source="icon_resume_arrow_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+            <Image Source="icon_sort_primary_accent.png"  HeightRequest="30">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SortFilterButtonTapped" />
                 </Image.GestureRecognizers>
