@@ -1,31 +1,99 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ArchiveReader.Views.WorkDetailPage"
-             >
+             x:Class="ArchiveReader.Views.WorkDetailPage" >
+
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Image Source="icon_save_primary_accent.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+            <Image Source="icon_vertical_dots.png"  HeightRequest="30"/>
+        </StackLayout>
+    </Shell.TitleView>
     
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="20" x:Name="DetailsStackLayout">
-                <Label Text="{Binding lastUpdated}" HorizontalTextAlignment="End" />
-                <Label Text="{Binding title}" FontAttributes="Bold" FontSize="18"/>
-                <Label Text="{Binding author}" />
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0, 20">
-                    <Button Text="Read" Pressed="ReadButton_Pressed"/>
-                    <Button Text="Save" Pressed="SaveButton_Pressed"/>
+        <ScrollView >
+            
+            <StackLayout>
+                
+                <!-- Top Buttons -->
+                <StackLayout Orientation="Horizontal" HeightRequest="45" BackgroundColor="{StaticResource PrimaryAccent}">
+                    <Grid HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                        <Label Grid.Column="0" Grid.Row="0"
+                            Text="Continue Reading" TextColor="{StaticResource SecondaryFont}" FontAttributes="Bold"
+                            VerticalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                            BackgroundColor="{StaticResource PrimaryAccent}" />
+
+                        <Label Grid.Column="1" Grid.Row="0"
+                            Text="Read From the Beginning"  TextColor="{StaticResource SecondaryFont}" FontAttributes="Bold" 
+                            VerticalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                            BackgroundColor="{StaticResource PrimaryAccent}">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ReadFromBeginningButton_Pressed" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
                 </StackLayout>
 
-                <!-- visual divider here -->
+                <!-- Work Details -->
+                <StackLayout Margin="0, -6" Padding="25, 20"  BackgroundColor="{StaticResource DefaultForeground}">
+                    <Label Text="{Binding fandoms}" FontAttributes="Italic, Bold" Padding="-8, 0, 0, 0"/>
+                    <Label Text="{Binding title}" FontSize="18" FontAttributes="Bold" Padding="-8, 0, 0, 0"/>
 
-                <Label Text="{Binding fandoms}" />
-                <Label Text="{Binding tags}" />
-                <Label Text="{Binding summary}" />
+                    <StackLayout Orientation="Horizontal" Margin="0, -4">
+                        <Label Text="{Binding author}" FontSize="14" FontAttributes="Bold"  Padding="-8, 0, 0, 0"/>
+                        <Label Text="{Binding lastUpdated}" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" />
+                    </StackLayout>
 
-                <!-- visual divider here -->
 
-                <Label Text="{Binding AllStats}" />
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0, 8">
+                    </StackLayout>
 
+                    
+                    <Label Text="{Binding summary}" />
+
+                    <Label Text="{Binding AllStats}" HorizontalTextAlignment="End" Padding="0, 10"/>
+
+                    <Line HeightRequest="2" BackgroundColor="{StaticResource PrimaryFont}" HorizontalOptions="FillAndExpand"/>
+
+                    <Label Text="{Binding tags}" FontAttributes="Italic" />
+                    
+                </StackLayout>
+
+                <StackLayout x:Name="ChaptersLayout" VerticalOptions="FillAndExpand">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout HeightRequest="60">
+                                <Label Text="{Binding title}" FontSize="18" Padding="10, 0" VerticalOptions="CenterAndExpand"/>
+                                <Line HeightRequest="2" BackgroundColor="{StaticResource PrimaryFont}" HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                
+                <!-- Chapters
+                <ListView x:Name="chaptersListView"
+                          Margin="0, 0, 0, 0"
+                          ItemSelected="ChaptersListView_ItemSelected"
+                          ItemTapped="ChaptersListView_ItemTapped"
+                          RowHeight="60">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                
+                                <StackLayout>
+                                    <Label Text="{Binding title}" FontSize="18" Padding="10, 0" VerticalOptions="CenterAndExpand"/>
+                                    <Line HeightRequest="2" BackgroundColor="{StaticResource PrimaryFont}" HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                -->
             </StackLayout>
+
         </ScrollView>
         
     </ContentPage.Content>

@@ -16,6 +16,7 @@
             <Color x:Key="DefaultBackground">White</Color>
             <Color x:Key="DefaultForeground">#E0E0E0</Color>
             <Color x:Key="PrimaryFont">#3A3A3A</Color>
+            <Color x:Key="SecondaryFont">White</Color>
             <Color x:Key="PrimaryAccent">#860000</Color>
             <Color x:Key="GrayedOut">#A1A1A1</Color>
 
