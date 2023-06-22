@@ -21,23 +21,47 @@ namespace ArchiveReader.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ReaderPage : ContentPage
     {
+        private string _apiFunctionPath;
+
         private HttpClient _client;
         private WebView _webView;
         private HtmlWebViewSource _htmlSource;
 
         private Work _currentWork;
+        private int _startupChapterNumber;
         private int _currentChapterNumber;
-        private string _apiFunctionPath;
         private ObservableCollection<Chapter> _chapters;
 
+        
         public ReaderPage()
         {
             InitializeComponent();
         }
 
-        public ReaderPage(Work workToRead)
+        public ReaderPage(Work workToRead, int startupChapterNumber = 1)
         {
             InitializeComponent();
+            RunApiSetup();
+
+            Shell.SetBackButtonBehavior(this, new BackButtonBehavior()
+            {
+                Command = new Command(async () => {
+                    Debug.WriteLine("GoBack");
+                    Debug.WriteLine($"Shell Items Null: {Shell.Current.Items == null}");
+                    await Navigation.PopAsync();
+                })
+            });
+
+            chaptersListView.ItemsSource = _chapters;
+            _startupChapterNumber = startupChapterNumber;
+
+            _currentWork = workToRead;
+            BindingContext = _currentWork;
+        }
+
+        private void RunApiSetup()
+        {
+            _apiFunctionPath = "";
 
             _client = new HttpClient()
             {
@@ -55,21 +79,6 @@ namespace ArchiveReader.Views
                 HeightRequest = 1000
             };
             webViewStackLayout.Children.Add(_webView);
-
-            _currentWork = workToRead;
-            _apiFunctionPath = "";
-            chaptersListView.ItemsSource = _chapters;
-
-            Shell.SetBackButtonBehavior(this, new BackButtonBehavior()
-            {
-                Command = new Command(async () => {
-                    Debug.WriteLine("GoBack");
-                    Debug.WriteLine($"Shell Items Null: {Shell.Current.Items == null}");
-                    await Navigation.PopAsync();
-                })
-            });
-
-            BindingContext = _currentWork;
         }
 
         protected override void OnBindingContextChanged()
@@ -81,7 +90,7 @@ namespace ArchiveReader.Views
 
         private async void SetUpReader()
         {
-            await HandleWorkBody(1);
+            await HandleWorkBody(_startupChapterNumber);
             await HandleChapters();
             //Debug.WriteLine("SetUpReader");
         }
@@ -134,9 +143,11 @@ namespace ArchiveReader.Views
                     List<Chapter> outputChapters = JsonSerializer.Deserialize<List<Chapter>>(contentString);
 
                     _chapters = new ObservableCollection<Chapter>();
-                    foreach (Chapter chapter in outputChapters)
+                    for (int i = 0; i < outputChapters.Count; i++)
                     {
-                        //string[] titleSplit = chapter.title.Split(new[] { '.' }, 2);
+                        var chapter = outputChapters[i];
+                        chapter.number = i + 1;
+
                         _chapters.Add(chapter);
                     }
 

@@ -94,10 +94,10 @@ namespace ArchiveReader.Views
 
                         //int splitIndex = chapter.title.IndexOf('.');
                         //chapter.title = chapter.title.Substring(splitIndex + 1);
-
+                        chapter.number = i + 1;
                         _chapters.Add(chapter);
 
-                        contentLayout.Children.Add(CreateChapterLayout(chapter));
+                        chaptersLayout.Children.Add(CreateChapterLayout(chapter));
                     }
 
                     pageScrollView.ForceLayout();
@@ -125,14 +125,9 @@ namespace ArchiveReader.Views
             await db.SaveWorkAsync(_currentWork);
         }
 
-        private void ChaptersListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void OpenChapter(int chapterNumber)
         {
-            //chaptersListView.SelectedItem = null;
-        }
-
-        private void ChaptersListView_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            
+            await Navigation.PushAsync(new ReaderPage(_currentWork, chapterNumber));
         }
 
         private StackLayout CreateChapterLayout(Chapter chapterToBind)
@@ -148,6 +143,18 @@ namespace ArchiveReader.Views
 
             Line divider = new Line() { HeightRequest = 2, BackgroundColor = _primaryFont };
 
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += (s, e) =>
+            {
+                StackLayout layoutSender = (StackLayout)s;
+                Chapter boundChapter = (Chapter)layoutSender.BindingContext;
+
+                if (boundChapter != null)
+                {
+                    OpenChapter(boundChapter.number);
+                }
+            };
+
             StackLayout layout = new StackLayout()
             {
                 HeightRequest = 60,
@@ -155,8 +162,14 @@ namespace ArchiveReader.Views
                 {
                     titleLabel,
                     divider
+                },
+                BindingContext = chapterToBind,
+                GestureRecognizers = 
+                {
+                    tapGestureRecognizer
                 }
             };
+
 
             return layout;
         }
