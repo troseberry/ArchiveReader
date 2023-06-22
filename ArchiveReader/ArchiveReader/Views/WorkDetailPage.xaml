@@ -11,9 +11,9 @@
     </Shell.TitleView>
     
     <ContentPage.Content>
-        <ScrollView >
+        <ScrollView x:Name="pageScrollView">
             
-            <StackLayout>
+            <StackLayout x:Name="contentLayout" VerticalOptions="FillAndExpand" >
                 
                 <!-- Top Buttons -->
                 <StackLayout Orientation="Horizontal" HeightRequest="45" BackgroundColor="{StaticResource PrimaryAccent}">
@@ -61,37 +61,7 @@
                     
                 </StackLayout>
 
-                <StackLayout x:Name="ChaptersLayout" VerticalOptions="FillAndExpand">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout HeightRequest="60">
-                                <Label Text="{Binding title}" FontSize="18" Padding="10, 0" VerticalOptions="CenterAndExpand"/>
-                                <Line HeightRequest="2" BackgroundColor="{StaticResource PrimaryFont}" HorizontalOptions="FillAndExpand"/>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
-                
-                <!-- Chapters
-                <ListView x:Name="chaptersListView"
-                          Margin="0, 0, 0, 0"
-                          ItemSelected="ChaptersListView_ItemSelected"
-                          ItemTapped="ChaptersListView_ItemTapped"
-                          RowHeight="60">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                
-                                <StackLayout>
-                                    <Label Text="{Binding title}" FontSize="18" Padding="10, 0" VerticalOptions="CenterAndExpand"/>
-                                    <Line HeightRequest="2" BackgroundColor="{StaticResource PrimaryFont}" HorizontalOptions="FillAndExpand"/>
-                                </StackLayout>
-                                
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                -->
+                <!-- Chapters added via script -->
             </StackLayout>
 
         </ScrollView>
