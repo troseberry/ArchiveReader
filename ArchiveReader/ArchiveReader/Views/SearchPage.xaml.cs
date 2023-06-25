@@ -14,6 +14,7 @@ using Xamarin.Forms.Xaml;
 using ArchiveReader.Models;
 using ArchiveReader.Enums;
 using ArchiveReader.Util;
+using Xamarin.Essentials;
 
 namespace ArchiveReader.Views
 {
@@ -31,6 +32,38 @@ namespace ArchiveReader.Views
         private SortFilterArgs _sortFiterArgs;
         private bool _isSorted = false;
 
+
+        public List<TestSearch> Searches;
+
+        public SearchPage()
+        {
+            
+            InitializeComponent();
+
+            Searches = new List<TestSearch>()
+            {
+                new TestSearch { Name = "Works Search", Type = SearchType.Works },
+                new TestSearch { Name = "Tags Search", Type = SearchType.Tags }
+            };
+
+            carousel.ItemsSource = Searches;
+
+        }
+
+
+        private void CreateSearchLayouts()
+        {
+            Searches = new List<TestSearch>()
+            {
+                new TestSearch { Name = "Works Search", Type = SearchType.Works },
+                new TestSearch { Name = "Tags Search", Type = SearchType.Tags }
+            };
+
+            carousel.SetBinding(ItemsView.ItemsSourceProperty, "Searches");
+        }
+
+
+        /*
         public SearchPage()
         {
             InitializeComponent();
@@ -134,12 +167,10 @@ namespace ArchiveReader.Views
                         return false;
                     }
                     
-                    /*
-                    foreach(Work w in outputWork)
-                    {
-                        w.GenerateExtraInfo();
-                    }
-                    */
+                    //foreach(Work w in outputWork)
+                    //{
+                    //    w.GenerateExtraInfo();
+                    //}
 
                     resultsListView.ItemsSource = outputWork;
                     currentPageNumberLabel.Text = _currentPageNumber.ToString();
@@ -230,6 +261,33 @@ namespace ArchiveReader.Views
             await RunAPICall();
 
             resultsListView.IsRefreshing = false;
+        }
+
+        */
+    }
+
+    public enum SearchType
+    {
+        Works,
+        Bookmarks,
+        People,
+        Tags
+    }
+
+    public struct TestSearch
+    {
+        public string Name;
+        public SearchType Type;
+    }
+
+    public class SearchTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate WorkSearch { get; set; }
+        public DataTemplate TagSearch { get; set; }
+
+        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
+        {
+            return ((TestSearch)item).Type == SearchType.Works ? WorkSearch : TagSearch;
         }
     }
 }

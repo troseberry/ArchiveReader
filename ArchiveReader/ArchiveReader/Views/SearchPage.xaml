@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ArchiveReader.Views.SearchPage"
              xmlns:vm="clr-namespace:ArchiveReader.ViewModels"
-             xmlns:local ="clr-namespace:ArchiveReader.DataTemplates"
+             xmlns:local ="clr-namespace:ArchiveReader.DataTemplates" 
+             xmlns:views="clr-namespace:ArchiveReader.Views"
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -16,87 +17,196 @@
             <Image Source="icon_vertical_dots.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
         </StackLayout>
     </Shell.TitleView>
-    
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="WorkSearchBuilderTemplate">
+            <!-- below stack layout fills whole view-->
+            <StackLayout BackgroundColor="{StaticResource DefaultBackground}">
+
+                <ScrollView>
+                    <StackLayout Padding="20, 10">
+                        <Label Text="Work Info" FontSize="20" FontAttributes="Bold"
+                           HorizontalOptions="Center" Padding="0,0,0,10"/>
+
+                        <Entry x:Name="anyFieldEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Any Field"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="titleEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Title"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="authorEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Author/Artist"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="dateEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Date"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <!-- Completion Status -->
+                        <StackLayout Padding="0, 15, 0, 0">
+                            <Label Text="Completion Status" FontSize="20"/>
+
+                            <StackLayout Padding="25, 0, 0, 0">
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="allWorksCompletionCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="All Works" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="completeWorksCompletionCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Complete Works Only" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="inProgressWorksCompletionCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Works In Progess Only" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <!-- Crossover Status -->
+                        <StackLayout Padding="0, 15, 0, 0">
+                            <Label Text="Crossovers" FontSize="20"/>
+
+                            <StackLayout Padding="25, 0, 0, 0">
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="includeCrossoversCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Include Crossovers" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="excludeCrossoversCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Exclude Crossovers" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="onlyCrossoversCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Only Crossovers" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <!-- Single Chapter -->
+                        <StackLayout Orientation="Horizontal"  Padding="0, 15">
+                            <Label Text="Single Chapter" FontSize="20" VerticalTextAlignment="Center"/>
+                            <CheckBox  x:Name="singleChapterCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                        </StackLayout>
+
+                        <Entry x:Name="wordCountEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Word Count"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="languageEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Language"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <StackLayout Padding="0, 15">
+                            <Button Text="Search"
+                                    HorizontalOptions="Center"
+                                    CornerRadius="8"
+                                    MinimumWidthRequest="75"/>
+                        </StackLayout>
+                        
+                    </StackLayout>
+                </ScrollView>
+                
+            </StackLayout>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TagSearchTemplate">
+            <StackLayout BackgroundColor="blue">
+                <Frame HasShadow="True"
+                       BorderColor="DarkGray"
+                       CornerRadius="5"
+                       Margin="20"
+                       HeightRequest="300"
+                       HorizontalOptions="Center"
+                       VerticalOptions="CenterAndExpand">
+
+                    <StackLayout>
+                        <Label Text="Second Layout" />
+                        <Label Text="{Binding Name}" />
+                        <Label Text="{Binding Type}" />
+                    </StackLayout>
+
+                </Frame>
+            </StackLayout>
+        </DataTemplate>
+
+        <views:SearchTemplateSelector x:Key="SearchSelector"
+                                        WorkSearch="{StaticResource WorkSearchBuilderTemplate}"
+                                        TagSearch="{StaticResource TagSearchTemplate}" />
+
+    </ContentPage.Resources>
+        
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal" Padding="10">
-                <Grid HeightRequest="65">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8*" />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
+            <StackLayout 
+                Orientation="Horizontal"
+                BackgroundColor="{StaticResource PrimaryAccent}"
+                HeightRequest="35"
+                Margin="0, 0, 0, -6">
 
-                    <SearchBar x:Name="searchBar" Grid.Column="0"
-                       Placeholder="Search tag..." 
-                       PlaceholderColor ="#ededed"
-                       TextColor="#ededed"
-                       Margin="-15, 0, 0, 0" 
-                       SearchButtonPressed="SearchBar_SearchButtonPressed"/>
-                    <Button x:Name="sortFilterButton" Grid.Column="1"
-                        Text="Sort"
-                        IsEnabled="False"
-                        Clicked="SortFilterButton_Clicked"
-                        HorizontalOptions="EndAndExpand"/>
+                <Grid HorizontalOptions="FillAndExpand">
+                    <Label Text="Works" Grid.Column="0" FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           TextColor="{StaticResource SecondaryFont}"/>
+                    <Label Text="Bookmarks" Grid.Column="1" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           TextColor="{StaticResource PrimaryFont_HalfOpacity}"/>
+                    <Label Text="People" Grid.Column="2" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           TextColor="{StaticResource PrimaryFont_HalfOpacity}"/>
+                    <Label Text="Tags" Grid.Column="3" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           TextColor="{StaticResource PrimaryFont_HalfOpacity}"/>
                 </Grid>
-                
+
+
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal" Padding="25, 10, 25, 0" HorizontalOptions="CenterAndExpand">
-                <Button x:Name="previousPageButton"
-                        IsEnabled="False"
-                        Text="Prev" 
-                        Clicked="PrevButton_Clicked"/>
-                <Label x:Name="currentPageNumberLabel"
-                       Text="#" 
-                       VerticalTextAlignment="Center" 
-                       HorizontalTextAlignment="Center" 
-                       FontSize="18"  />
-                <Label Text="/" 
-                       VerticalTextAlignment="Center" 
-                       HorizontalTextAlignment="Center" 
-                       FontSize="18" />
-                <Label x:Name="totalPagesLabel"
-                       Text="#" 
-                       VerticalTextAlignment="Center" 
-                       HorizontalTextAlignment="Center" 
-                       FontSize="18" />
-                <Button x:Name="nextPageButton"
-                        Text="Next"
-                        Clicked="NextButton_Clicked"/>
-            </StackLayout>
-            <!-- <Label x:Name="resultsLabel"/> -->
+            <CarouselView x:Name="carousel"
+                          Loop="False"
+                      ItemTemplate="{StaticResource SearchSelector}">
 
-            <StackLayout>
-                <AbsoluteLayout>
-                    <Label x:Name="noResultsLabel"
-                           IsVisible="false"
-                           Padding="10"
-                           Text="No results found. You may want to edit your search to make it less specific."
-                           AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                           AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"/>
-                    <ActivityIndicator x:Name="loadingActivityIndicator"
-                                       AbsoluteLayout.LayoutBounds=".5, .5, .25, .25"
-                                       AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"/>
-
-                    <ListView x:Name="resultsListView"
-                              AbsoluteLayout.LayoutBounds=".5, .5, 1, 1"
-                              AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"
-                              HasUnevenRows="true"
-                              ItemSelected="ResultsListView_ItemSelected"
-                              ItemTapped="ResultsListView_ItemTapped"
-                              IsPullToRefreshEnabled="true"
-                              Refreshing="ResultsListView_Refreshing">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <local:WorkDataTemplateWithSummary/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-
-                </AbsoluteLayout>
-                
-            </StackLayout>
-            
+            </CarouselView>
         </StackLayout>
+        
+        
+
+
     </ContentPage.Content>
 </ContentPage>
+        
