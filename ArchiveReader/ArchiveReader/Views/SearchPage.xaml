@@ -2,23 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ArchiveReader.Views.SearchPage"
-             xmlns:vm="clr-namespace:ArchiveReader.ViewModels"
-             xmlns:local ="clr-namespace:ArchiveReader.DataTemplates" 
-             xmlns:views="clr-namespace:ArchiveReader.Views"
-             Title="{Binding Title}">
+             xmlns:vm="clr-namespace:ArchiveReader.ViewModels">
 
     <ContentPage.BindingContext>
         <vm:SearchViewModel />
     </ContentPage.BindingContext>
-
+    
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal">
-            <Label Text="{Binding Title}" FontSize="19" VerticalOptions="CenterAndExpand" FontAttributes="Bold" CharacterSpacing="1"/>
+            <Label Text="{Binding Title}" FontSize="19" VerticalOptions="CenterAndExpand" FontAttributes="Bold"  CharacterSpacing="1"/>
             <Image Source="icon_vertical_dots.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
         </StackLayout>
     </Shell.TitleView>
 
     <ContentPage.Resources>
+        
         <DataTemplate x:Key="WorkSearchBuilderTemplate">
             <!-- below stack layout fills whole view-->
             <StackLayout BackgroundColor="{StaticResource DefaultBackground}">
@@ -132,6 +130,189 @@
                            ReturnType="Next"
                            ClearButtonVisibility="WhileEditing"/>
 
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="2" Margin="0, 15"/>
+                        
+                        <Label Text="Work Tags" FontSize="20" FontAttributes="Bold"
+                           HorizontalOptions="Center" />
+
+                        
+                        <Entry x:Name="fandomsEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Fandoms"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Picker x:Name="ratingsPicker"
+                            Title="Rating"
+                                BackgroundColor="{StaticResource DefaultForeground}"
+                                TitleColor="{StaticResource PrimaryFont_HalfOpacity}"
+                                TextColor="{StaticResource PrimaryFont}">
+                        </Picker>
+
+                        <!-- Warnings -->
+                        <StackLayout Padding="0, 15, 0, 0">
+                            <Label Text="Warnings" FontSize="20"/>
+
+                            <StackLayout Padding="25, 0, 0, 0">
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="creatorChoseNoneWarningCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Creator Chose Not To Use Archive Warnings" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="violenceWarningCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Graphic Depictions Of Violence" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="characterDeathWarningCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Major Character Death" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="noneApplyWarningCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="No Archive Warnings Apply" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="nonConWarningCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Rape/Non-Con" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="underageWarningCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Underage" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <!-- Categories/Pairings -->
+                        <StackLayout Padding="0, 15, 0, 0">
+                            <Label Text="Categories" FontSize="20"/>
+
+                            <StackLayout Padding="25, 0, 0, 0">
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="ffCategoryCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="F/F" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="fmCategoryCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="F/M" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="genCateogryCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Gen" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="mmCategoryCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="M/M" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="multiCateogryCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Multi" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="otherCategoryCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Other" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <Entry x:Name="charactersEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Characters"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="relationshipsEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Relationships"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="additionalTagsEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Additional Tags"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="2" Margin="0, 15"/>
+
+                        <Label Text="Work Stats" FontSize="20" FontAttributes="Bold"
+                           HorizontalOptions="Center" />
+
+                        <Entry x:Name="hitsEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Hits"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="kudosEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Kudos"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="commentsEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Comments"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="bookmarksEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Bookmarks"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="2" Margin="0, 15"/>
+                        
+                        <Picker x:Name="sortMethodPicker"
+                            Title="Sort By"
+                                BackgroundColor="{StaticResource DefaultForeground}"
+                                TitleColor="{StaticResource PrimaryFont_HalfOpacity}"
+                                TextColor="{StaticResource PrimaryFont}">
+                        </Picker>
+
+                        <Picker x:Name="sortDirectionPicker"
+                            Title="Sort Direction"
+                                BackgroundColor="{StaticResource DefaultForeground}"
+                                TitleColor="{StaticResource PrimaryFont_HalfOpacity}"
+                                TextColor="{StaticResource PrimaryFont}">
+                        </Picker>
+
+                        <!-- Search Button -->
                         <StackLayout Padding="0, 15">
                             <Button Text="Search"
                                     HorizontalOptions="Center"
@@ -145,32 +326,299 @@
             </StackLayout>
         </DataTemplate>
 
-        <DataTemplate x:Key="TagSearchTemplate">
-            <StackLayout BackgroundColor="blue">
-                <Frame HasShadow="True"
-                       BorderColor="DarkGray"
-                       CornerRadius="5"
-                       Margin="20"
-                       HeightRequest="300"
-                       HorizontalOptions="Center"
-                       VerticalOptions="CenterAndExpand">
+        <DataTemplate x:Key="BookmarkSearchBuilderTemplate">
+            <StackLayout BackgroundColor="{StaticResource DefaultBackground}">
+                <ScrollView>
+                    <StackLayout Padding="20, 10">
+                        <Label Text="Bookmark Search" FontSize="20" FontAttributes="Bold"
+                           HorizontalOptions="Center" Padding="0,0,0,10"/>
 
-                    <StackLayout>
-                        <Label Text="Second Layout" />
-                        <Label Text="{Binding Name}" />
-                        <Label Text="{Binding Type}" />
+                        <Entry x:Name="anyFieldEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Any Field on Work"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="workTagsEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Work Tags"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Picker x:Name="bookmarkTypePicker"
+                            Title="Type"
+                                BackgroundColor="{StaticResource DefaultForeground}"
+                                TitleColor="{StaticResource PrimaryFont_HalfOpacity}"
+                                TextColor="{StaticResource PrimaryFont}">
+                        </Picker>
+
+                        <Picker x:Name="languagePicker"
+                            Title="Language"
+                                BackgroundColor="{StaticResource DefaultForeground}"
+                                TitleColor="{StaticResource PrimaryFont_HalfOpacity}"
+                                TextColor="{StaticResource PrimaryFont}">
+                        </Picker>
+
+                        <Entry x:Name="dateUpdatedEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Date Updated"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+
+                        <Entry x:Name="anyFieldBookmarkEntry"
+                               Margin="0, 15, 0, 0"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Any Field on Bookmark"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="bookmarkersTagsEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Bookmarker's Tags"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="bookmarkerEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Bookmarker"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="notesEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Notes"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <!-- Bookmark Type -->
+                        <StackLayout Padding="0, 15, 0, 0">
+                            <Label Text="Bookmark Type" FontSize="20"/>
+
+                            <StackLayout Padding="25, 0, 0, 0">
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="recsBookmarkCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Rec" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="withNotesBookmarkCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="With Notes" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <Entry x:Name="dateBookmarkedEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Date Bookmarked"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+
+
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="2" Margin="0, 15"/>
+
+                        <Picker x:Name="sortMethodPicker"
+                            Title="Sort By"
+                                BackgroundColor="{StaticResource DefaultForeground}"
+                                TitleColor="{StaticResource PrimaryFont_HalfOpacity}"
+                                TextColor="{StaticResource PrimaryFont}">
+                        </Picker>
+
+                        <!-- Search Button -->
+                        <StackLayout Padding="0, 15">
+                            <Button Text="Search"
+                                    HorizontalOptions="Center"
+                                    CornerRadius="8"
+                                    MinimumWidthRequest="75"/>
+                        </StackLayout>
                     </StackLayout>
-
-                </Frame>
+                </ScrollView>
             </StackLayout>
         </DataTemplate>
 
-        <views:SearchTemplateSelector x:Key="SearchSelector"
-                                        WorkSearch="{StaticResource WorkSearchBuilderTemplate}"
-                                        TagSearch="{StaticResource TagSearchTemplate}" />
+        <DataTemplate x:Key="PeopleSearchBuilderTemplate">
+            <StackLayout BackgroundColor="{StaticResource DefaultBackground}">
+                <ScrollView>
+                    <StackLayout Padding="20, 10">
+                        <Label Text="People Search" FontSize="20" FontAttributes="Bold"
+                           HorizontalOptions="Center" Padding="0,0,0,10"/>
+
+                        <Entry x:Name="anyFieldEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Search All Fields"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="nameEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Name"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="fandomEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Fandom"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <!-- Search Button -->
+                        <StackLayout Padding="0, 15">
+                            <Button Text="Search"
+                                    HorizontalOptions="Center"
+                                    CornerRadius="8"
+                                    MinimumWidthRequest="75"/>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TagSearchBuilderTemplate">
+            <StackLayout BackgroundColor="{StaticResource DefaultBackground}">
+                <ScrollView>
+                    <StackLayout Padding="20, 10">
+
+                        <Label Text="Tags Search" FontSize="20" FontAttributes="Bold"
+                           HorizontalOptions="Center" Padding="0,0,0,10"/>
+                        
+                        <Entry x:Name="tagNameEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Tag Name"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <Entry x:Name="fandomsEntry"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Fandoms"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           ReturnType="Next"
+                           ClearButtonVisibility="WhileEditing"/>
+
+                        <!-- Tag Type -->
+                        <StackLayout Padding="0, 15, 0, 0">
+                            <Label Text="Types" FontSize="20"/>
+
+                            <StackLayout Padding="25, 0, 0, 0">
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="fandomTypeCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Fandom" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="characterTypeCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Character" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="relationshipTypeCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Relationship" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="freeformTypeCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Freeform" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="anyTypeCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Any Type" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <!-- Wrangling Status -->
+                        <StackLayout Padding="0, 15, 0, 0">
+                            <Label Text="Wrangling Status" FontSize="20"/>
+
+                            <StackLayout Padding="25, 0, 0, 0">
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="canonicalWranglingCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Canonical" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="nonCanonicalWranglingCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Non-Canonical" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox  x:Name="anyWranglingCheckBox" Color="{StaticResource PrimaryAccent}"/>
+                                    <Label Text="Any Status" FontSize="17" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="2" Margin="0, 15"/>
+                        
+                        <Picker x:Name="sortMethodPicker"
+                            Title="Sort By"
+                                BackgroundColor="{StaticResource DefaultForeground}"
+                                TitleColor="{StaticResource PrimaryFont_HalfOpacity}"
+                                TextColor="{StaticResource PrimaryFont}">
+                        </Picker>
+
+                        <Picker x:Name="sortDirectionPicker"
+                            Title="Sort Direction"
+                                BackgroundColor="{StaticResource DefaultForeground}"
+                                TitleColor="{StaticResource PrimaryFont_HalfOpacity}"
+                                TextColor="{StaticResource PrimaryFont}">
+                        </Picker>
+
+                        <!-- Search Button -->
+                        <StackLayout Padding="0, 15">
+                            <Button Text="Search"
+                                    HorizontalOptions="Center"
+                                    CornerRadius="8"
+                                    MinimumWidthRequest="75"/>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </DataTemplate>
 
     </ContentPage.Resources>
         
+    
     <ContentPage.Content>
         <StackLayout>
             <StackLayout 
@@ -180,26 +628,25 @@
                 Margin="0, 0, 0, -6">
 
                 <Grid HorizontalOptions="FillAndExpand">
-                    <Label Text="Works" Grid.Column="0" FontAttributes="Bold"
-                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
-                           TextColor="{StaticResource SecondaryFont}"/>
-                    <Label Text="Bookmarks" Grid.Column="1" 
-                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
-                           TextColor="{StaticResource PrimaryFont_HalfOpacity}"/>
-                    <Label Text="People" Grid.Column="2" 
-                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
-                           TextColor="{StaticResource PrimaryFont_HalfOpacity}"/>
-                    <Label Text="Tags" Grid.Column="3" 
-                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
-                           TextColor="{StaticResource PrimaryFont_HalfOpacity}"/>
+                    <Label x:Name="workSearchHeaderTitle" 
+                            Text="Works" Grid.Column="0"
+                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                    <Label x:Name="bookmarkSearchHeaderTitle"
+                            Text="Bookmarks" Grid.Column="1" 
+                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                    <Label x:Name="peopleSearchHeaderTitle"
+                            Text="People" Grid.Column="2" 
+                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                    <Label x:Name="tagSearchHeaderTitle"
+                            Text="Tags" Grid.Column="3" 
+                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
                 </Grid>
 
 
             </StackLayout>
 
             <CarouselView x:Name="carousel"
-                          Loop="False"
-                      ItemTemplate="{StaticResource SearchSelector}">
+                        Loop="False">
 
             </CarouselView>
         </StackLayout>

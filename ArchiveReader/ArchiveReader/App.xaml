@@ -21,6 +21,7 @@
             <Color x:Key="PrimaryAccent">#860000</Color>
             <Color x:Key="GrayedOut">#A1A1A1</Color>
 
+            <!-- Implicit Styles -->
             <Style TargetType="Button">
                 <Setter Property="FontFamily" Value="Lato-Regular" />
                 <Setter Property="TextColor" Value="{StaticResource SecondaryFont}"></Setter>
@@ -47,6 +48,17 @@
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource PrimaryFont}"/>
                 <Setter Property="FontFamily" Value="Lato-Regular" />
+            </Style>
+            
+            <!-- Explicit Styles -->
+            <Style x:Key="LabelSubHeaderSelected" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource SecondaryFont}"/>
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <Style x:Key="LabelSubHeaderUnselected" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryFont_HalfOpacity}"/>
+                <Setter Property="FontAttributes" Value="None" />
             </Style>
         </ResourceDictionary>        
     </Application.Resources>

@@ -15,6 +15,7 @@ using ArchiveReader.Models;
 using ArchiveReader.Enums;
 using ArchiveReader.Util;
 using Xamarin.Essentials;
+using System.Globalization;
 
 namespace ArchiveReader.Views
 {
@@ -25,6 +26,8 @@ namespace ArchiveReader.Views
         private string _apiFunctionPath;
         private string _resultString;
 
+        private SearchType _currentSearchType;
+
         private string _currentSearchQuery;
         private string _currentSortQuery;
         private int _currentPageNumber;
@@ -32,34 +35,71 @@ namespace ArchiveReader.Views
         private SortFilterArgs _sortFiterArgs;
         private bool _isSorted = false;
 
+        private Style _selectedTitleStyle;
+        private Style _unselectedTitleStyle;
 
-        public List<TestSearch> Searches;
+        private SearchTemplateSelector _searchTemplateSelector;
+        public List<SearchType> Searches;
 
         public SearchPage()
         {
             
             InitializeComponent();
 
-            Searches = new List<TestSearch>()
+            #region Init Styles
+            if (Application.Current.Resources.TryGetValue("LabelSubHeaderSelected", out object selectedStyle))
             {
-                new TestSearch { Name = "Works Search", Type = SearchType.Works },
-                new TestSearch { Name = "Tags Search", Type = SearchType.Tags }
+                _selectedTitleStyle = (Style)selectedStyle;
+            }
+
+            if (Application.Current.Resources.TryGetValue("LabelSubHeaderUnselected", out object unselectedStyle))
+            {
+                _unselectedTitleStyle = (Style)unselectedStyle;
+            }
+            #endregion
+
+            _searchTemplateSelector = new SearchTemplateSelector(this);
+            //_searchTemplateSelector.OnSearchSelected += SearchTemplateSelectorOnSearchSelected;
+
+            Searches = new List<SearchType>()
+            {
+                SearchType.Works,
+                SearchType.Bookmarks,
+                SearchType.People,
+                SearchType.Tags
             };
 
+            carousel.ItemTemplate = _searchTemplateSelector;
             carousel.ItemsSource = Searches;
+            carousel.CurrentItemChanged += CarouselOnCurrentItemChanged;
+
 
         }
 
-
-        private void CreateSearchLayouts()
+        private void CarouselOnCurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
         {
-            Searches = new List<TestSearch>()
-            {
-                new TestSearch { Name = "Works Search", Type = SearchType.Works },
-                new TestSearch { Name = "Tags Search", Type = SearchType.Tags }
-            };
+            var searchType = (SearchType)e.CurrentItem;
 
-            carousel.SetBinding(ItemsView.ItemsSourceProperty, "Searches");
+            workSearchHeaderTitle.Style = _unselectedTitleStyle;
+            bookmarkSearchHeaderTitle.Style = _unselectedTitleStyle;
+            peopleSearchHeaderTitle.Style = _unselectedTitleStyle;
+            tagSearchHeaderTitle.Style = _unselectedTitleStyle;
+
+            switch (searchType)
+            {
+                case SearchType.Works:
+                    workSearchHeaderTitle.Style = _selectedTitleStyle;
+                    break;
+                case SearchType.Bookmarks:
+                    bookmarkSearchHeaderTitle.Style = _selectedTitleStyle;
+                    break;
+                case SearchType.People:
+                    peopleSearchHeaderTitle.Style = _selectedTitleStyle;
+                    break;
+                case SearchType.Tags:
+                    tagSearchHeaderTitle.Style = _selectedTitleStyle;
+                    break;
+            }
         }
 
 
@@ -268,6 +308,7 @@ namespace ArchiveReader.Views
 
     public enum SearchType
     {
+        Invalid,
         Works,
         Bookmarks,
         People,
@@ -282,12 +323,59 @@ namespace ArchiveReader.Views
 
     public class SearchTemplateSelector : DataTemplateSelector
     {
+        public SearchType CurrentlySelectedSearch;
+
+        //public event EventHandler<SearchType> OnSearchSelected;
+
         public DataTemplate WorkSearch { get; set; }
+        public DataTemplate BookmarkSearch { get; set; }
+        public DataTemplate PeopleSearch { get; set; }
         public DataTemplate TagSearch { get; set; }
+
+        public SearchTemplateSelector(ContentPage context)
+        {
+            CurrentlySelectedSearch = SearchType.Works;
+
+            if (context.Resources.TryGetValue("WorkSearchBuilderTemplate", out object workSearchTemplate))
+            {
+                WorkSearch = (DataTemplate)workSearchTemplate;
+            }
+
+            if (context.Resources.TryGetValue("BookmarkSearchBuilderTemplate", out object bookmarkSearchTemplate))
+            {
+                BookmarkSearch = (DataTemplate)bookmarkSearchTemplate;
+            }
+
+            if (context.Resources.TryGetValue("PeopleSearchBuilderTemplate", out object peopleSearchTemplate))
+            {
+                PeopleSearch = (DataTemplate)peopleSearchTemplate;
+            }
+
+            if (context.Resources.TryGetValue("TagSearchBuilderTemplate", out object tagSearchTemplate))
+            {
+                TagSearch = (DataTemplate)tagSearchTemplate;
+            }
+        }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            return ((TestSearch)item).Type == SearchType.Works ? WorkSearch : TagSearch;
+            CurrentlySelectedSearch = (SearchType)item;
+            //OnSearchSelected?.Invoke(this, CurrentlySelectedSearch);
+
+            switch (CurrentlySelectedSearch)
+            {
+                case SearchType.Works:
+                    return WorkSearch;
+                case SearchType.Bookmarks:
+                    return BookmarkSearch;
+                case SearchType.People:
+                    return PeopleSearch;
+                case SearchType.Tags:
+                    return TagSearch;
+                default:
+                    return null;
+            }
         }
     }
+
 }

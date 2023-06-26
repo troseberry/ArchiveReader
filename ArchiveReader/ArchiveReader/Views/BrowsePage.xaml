@@ -18,17 +18,24 @@
     
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
-                <Label Padding="0, 20, 0, 0" Text="Find Your Favorites" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <StackLayout VerticalOptions="FillAndExpand">
+               
+                <SearchBar x:Name="quickSearchBar"
+                           Margin="20"
+                           Placeholder="Quick Search"
+                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
+                           TextColor="{StaticResource PrimaryFont}"
+                           BackgroundColor="{StaticResource DefaultForeground}"
+                           CancelButtonColor="{StaticResource PrimaryAccent}"/>
 
-                <Line BackgroundColor="{StaticResource PrimaryAccent}" HeightRequest="2" Margin="140, 5" />
-
-                <Label HorizontalOptions="Center"
-                   HorizontalTextAlignment="Center"
-                Text="Browse the archive by fandom and find new and &#10; interesting fanworks to read and enjoy."  />
-
+                <Label Text="Browse By Fandom"
+                       FontSize="14"
+                       Padding="10, 15, 0, 0"
+                       FontAttributes="Bold" />
+                <Line BackgroundColor="{StaticResource PrimaryAccent}" HeightRequest="2" Margin="5" />
+                
                 <!-- Fandoms -->
-                <StackLayout Padding="0, 30, 0, 0">
+                <StackLayout Padding="0">
 
                     <!-- Anime & Manga -->
                     <StackLayout Padding="10, 0"

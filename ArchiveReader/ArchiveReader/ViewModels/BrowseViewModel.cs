@@ -9,7 +9,7 @@ namespace ArchiveReader.ViewModels
     {
         public BrowseViewModel()
         {
-            Title = "Browse";
+            Title = "Explore";
         }
     }
 }
