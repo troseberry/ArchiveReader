@@ -12,28 +12,26 @@
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal">
             <Label Text="{Binding Title}" FontSize="19" VerticalOptions="CenterAndExpand" FontAttributes="Bold" CharacterSpacing="1"/>
-            <Image Source="icon_vertical_dots.png" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+            <Image Source="icon_search_primary_accent_red.png" HorizontalOptions="EndAndExpand" HeightRequest="35" Margin="0, 0, 10, 0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnSearchButtonPressed"/>
+                </Image.GestureRecognizers>
+            </Image>
         </StackLayout>
     </Shell.TitleView>
     
     <ContentPage.Content>
         <ScrollView>
             <StackLayout VerticalOptions="FillAndExpand">
-               
-                <SearchBar x:Name="quickSearchBar"
-                           Margin="20"
-                           Placeholder="Quick Search"
-                           PlaceholderColor="{StaticResource PrimaryFont_HalfOpacity}"
-                           TextColor="{StaticResource PrimaryFont}"
-                           BackgroundColor="{StaticResource DefaultForeground}"
-                           CancelButtonColor="{StaticResource PrimaryAccent}"/>
 
-                <Label Text="Browse By Fandom"
-                       FontSize="14"
-                       Padding="10, 15, 0, 0"
-                       FontAttributes="Bold" />
-                <Line BackgroundColor="{StaticResource PrimaryAccent}" HeightRequest="2" Margin="5" />
-                
+                <Label Padding="0, 20, 0, 0" Text="Find Your Favorites" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+                <Line BackgroundColor="{StaticResource PrimaryAccent}" HeightRequest="2" Margin="140, 5" />
+
+                <Label HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                Text="Browse the archive by fandom and find new and &#10; interesting fanworks to read and enjoy."  />
+
                 <!-- Fandoms -->
                 <StackLayout Padding="0">
 
@@ -48,7 +46,7 @@
                         <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="FandomSelected" />
+                            <TapGestureRecognizer Tapped="OnFandomSelected" />
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
@@ -63,7 +61,7 @@
                         <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="FandomSelected" />
+                            <TapGestureRecognizer Tapped="OnFandomSelected" />
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
@@ -78,7 +76,7 @@
                         <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="FandomSelected" />
+                            <TapGestureRecognizer Tapped="OnFandomSelected" />
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
@@ -93,7 +91,7 @@
                         <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="FandomSelected" />
+                            <TapGestureRecognizer Tapped="OnFandomSelected" />
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
@@ -108,7 +106,7 @@
                         <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="FandomSelected" />
+                            <TapGestureRecognizer Tapped="OnFandomSelected" />
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
@@ -123,7 +121,7 @@
                         <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="FandomSelected" />
+                            <TapGestureRecognizer Tapped="OnFandomSelected" />
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
@@ -138,7 +136,7 @@
                         <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="FandomSelected" />
+                            <TapGestureRecognizer Tapped="OnFandomSelected" />
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
@@ -153,7 +151,7 @@
                         <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="FandomSelected" />
+                            <TapGestureRecognizer Tapped="OnFandomSelected" />
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
@@ -168,7 +166,7 @@
                         <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="FandomSelected" />
+                            <TapGestureRecognizer Tapped="OnFandomSelected" />
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
@@ -183,7 +181,7 @@
                         <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="FandomSelected" />
+                            <TapGestureRecognizer Tapped="OnFandomSelected" />
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
@@ -198,7 +196,7 @@
                         <Line BackgroundColor="{StaticResource PrimaryFont}" HeightRequest="1" Opacity="0.5"/>
 
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="FandomSelected" />
+                            <TapGestureRecognizer Tapped="OnFandomSelected" />
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
                 </StackLayout>

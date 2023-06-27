@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArchiveReader.Views.WorkResultsPage"
+             xmlns:local ="clr-namespace:ArchiveReader.DataTemplates">
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <StackLayout Orientation="Horizontal"
+                         HeightRequest="55">
+                <Frame Padding="0" Margin="10" 
+                       HorizontalOptions="FillAndExpand"
+                       BackgroundColor="{StaticResource DefaultBackground}" 
+                       HasShadow="False" 
+                       BorderColor="{StaticResource PrimaryFont}" 
+                       CornerRadius="7">
+                    
+                    <SearchBar x:Name="searchBar"
+                            Margin="-10, 0, 0, 0"
+                            Placeholder="Search" 
+                            PlaceholderColor ="{StaticResource PrimaryFont_HalfOpacity}"
+                            TextColor="{StaticResource PrimaryFont}"
+                            SearchButtonPressed="OnSearchBarSearchButtonPressed" />
+                </Frame>
+                
+                <Image x:Name="sortFilterButton" 
+                        Source="icon_sort_primary_accent.png"
+                        HorizontalOptions="End"
+                        HeightRequest="35"
+                        IsEnabled="False">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSortFilterButtonClicked" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                
+
+            </StackLayout>
+
+            <Line BackgroundColor="{StaticResource PrimaryFont_HalfOpacity}" HeightRequest="2" />
+
+            <StackLayout Orientation="Horizontal" Padding="25, 10, 25, 0" HorizontalOptions="CenterAndExpand">
+                <Button x:Name="previousPageButton"
+                        IsEnabled="False"
+                        Text="Prev" 
+                        Clicked="OnPrevButtonClicked"/>
+                <Label x:Name="currentPageNumberLabel"
+                       Text="#" 
+                       VerticalTextAlignment="Center" 
+                       HorizontalTextAlignment="Center" 
+                       FontSize="18"  />
+                <Label Text="/" 
+                       VerticalTextAlignment="Center" 
+                       HorizontalTextAlignment="Center" 
+                       FontSize="18" />
+                <Label x:Name="totalPagesLabel"
+                       Text="#" 
+                       VerticalTextAlignment="Center" 
+                       HorizontalTextAlignment="Center" 
+                       FontSize="18" />
+                <Button x:Name="nextPageButton"
+                        Text="Next"
+                        Clicked="OnNextButtonClicked"/>
+            </StackLayout>
+
+
+            <StackLayout>
+                <AbsoluteLayout>
+                    <Label x:Name="noResultsLabel"
+                           IsVisible="false"
+                           Padding="10"
+                           Text="No results found. You may want to edit your search to make it less specific."
+                           AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                           AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"/>
+                    <ActivityIndicator x:Name="loadingActivityIndicator"
+                                       AbsoluteLayout.LayoutBounds=".5, .5, .25, .25"
+                                       AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"/>
+
+                    <ListView x:Name="resultsListView"
+                              AbsoluteLayout.LayoutBounds=".5, .5, 1, 1"
+                              AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"
+                              HasUnevenRows="true"
+                              ItemSelected="OnResultsListViewItemSelected"
+                              ItemTapped="OnResultsListViewItemTapped"
+                              IsPullToRefreshEnabled="true"
+                              Refreshing="OnResultsListViewRefreshing">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:WorkDataTemplateWithSummary/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </AbsoluteLayout>
+
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

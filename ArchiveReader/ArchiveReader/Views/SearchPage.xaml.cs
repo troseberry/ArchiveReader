@@ -59,7 +59,6 @@ namespace ArchiveReader.Views
             #endregion
 
             _searchTemplateSelector = new SearchTemplateSelector(this);
-            //_searchTemplateSelector.OnSearchSelected += SearchTemplateSelectorOnSearchSelected;
 
             Searches = new List<SearchType>()
             {
@@ -324,8 +323,6 @@ namespace ArchiveReader.Views
     public class SearchTemplateSelector : DataTemplateSelector
     {
         public SearchType CurrentlySelectedSearch;
-
-        //public event EventHandler<SearchType> OnSearchSelected;
 
         public DataTemplate WorkSearch { get; set; }
         public DataTemplate BookmarkSearch { get; set; }
