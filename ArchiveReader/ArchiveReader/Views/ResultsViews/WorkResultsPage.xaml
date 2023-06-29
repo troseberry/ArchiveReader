@@ -9,7 +9,9 @@
 
             <StackLayout Orientation="Horizontal"
                          HeightRequest="55">
-                <Frame Padding="0" Margin="10" 
+                
+                <Frame x:Name="searchBarFrame"
+                    Padding="0" Margin="10" 
                        HorizontalOptions="FillAndExpand"
                        BackgroundColor="{StaticResource DefaultBackground}" 
                        HasShadow="False" 
@@ -34,7 +36,13 @@
                     </Image.GestureRecognizers>
                 </Image>
 
-                
+                <Label x:Name="SearchResultsLabel" 
+                    Text="Search Results" 
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       IsVisible="false"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalTextAlignment="Center"/>
 
             </StackLayout>
 

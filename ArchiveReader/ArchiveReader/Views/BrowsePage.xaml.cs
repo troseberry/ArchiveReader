@@ -63,7 +63,7 @@ namespace ArchiveReader.Views
 
         private async void OnSearchButtonPressed(object sender, EventArgs e)
         {
-            var resultsPage = new WorkResultsPage();
+            var resultsPage = new WorkResultsPage(string.Empty, true, false, Enums.SearchType.Works);
 
             Shell.SetNavBarIsVisible(resultsPage, false);
             Shell.SetTabBarIsVisible(resultsPage, false);

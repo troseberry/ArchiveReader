@@ -1,4 +1,6 @@
-﻿using ArchiveReader.Models;
+﻿using ArchiveReader.Enums;
+using ArchiveReader.Models;
+using ArchiveReader.Util;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,6 +23,10 @@ namespace ArchiveReader.Views
         private string _apiFunctionPath;
         private string _resultString;
 
+        private bool _canSearch;
+        private bool _canSort;
+
+        private SearchType _currentSearchType;
         private string _currentSearchQuery;
         private string _currentSortQuery;
         private int _currentPageNumber;
@@ -28,7 +34,10 @@ namespace ArchiveReader.Views
 
         private SortFilterArgs _sortFiterArgs;
 
-        public WorkResultsPage()
+        private Color GrayedOutColor;
+
+        public WorkResultsPage(string searchQuery = "", bool canSearch = true, bool canSort = true,
+            SearchType pageSourceSearchType = SearchType.Works)
         {
             InitializeComponent();
 
@@ -36,22 +45,39 @@ namespace ArchiveReader.Views
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            searchBar.Focus();
+            //searchBar.Focus();
+            _currentSearchType = pageSourceSearchType;
+            _canSearch = canSearch;
+            _canSort = canSort;
+
+            if (!canSort)
+            {
+                //To-Do: gray out button
+                sortFilterButton.IsEnabled = false;
+            }
+            else
+            {
+                MessagingCenter.Subscribe<SortFilterPage, SortFilterArgs>(this, "SortAndFilter", async (sender, args) =>
+                {
+                    _isSorted = true;
+                    SortAndFilterResults(args);
+                });
+            }
 
         }
 
         #region Xaml Event Listeners
-        public void OnSearchBarSearchButtonPressed(object sender, EventArgs e)
+        public async void OnSearchBarSearchButtonPressed(object sender, EventArgs e)
         {
             _isSorted = false;
             _sortFiterArgs = new SortFilterArgs();
 
-            ExecuteSearch(searchBar.Text, string.Empty, 1);
+            await ExecuteSearch(searchBar.Text, string.Empty, 1);
         }
 
-        public void OnSortFilterButtonClicked(object sender, EventArgs e)
+        public async void OnSortFilterButtonClicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushModalAsync(new SortFilterPage());
         }
 
         public void OnPrevButtonClicked(object sender, EventArgs e)
@@ -81,11 +107,11 @@ namespace ArchiveReader.Views
 
         public void OnResultsListViewRefreshing(object sender, EventArgs e)
         {
-
+            
         }
         #endregion
 
-        private async void ExecuteSearch(string searchQuery, string sortQuery, int pageNumber)
+        private async Task ExecuteSearch(string searchQuery, string sortQuery, int pageNumber)
         {
             Debug.WriteLine($"[WorkResultsPage][OnSearchBarSearchButtonPressed] - Execute search -" +
                 $" Search Query {searchQuery}" +
@@ -113,13 +139,115 @@ namespace ArchiveReader.Views
             loadingActivityIndicator.IsRunning = false;
         }
 
+        private async void SortAndFilterResults(SortFilterArgs sortArgs)
+        {
+            if (!_canSort)
+            {
+                return;
+            }
+
+            _sortFiterArgs = sortArgs;
+            string sortQuery = GetSortQueryFromArgs(_sortFiterArgs);
+
+            await ExecuteSearch(_currentSearchQuery, sortQuery, 1);
+        }
+
+        private string GetSortQueryFromArgs(SortFilterArgs newSortArgs)
+        {
+            string newSortQuery = $"&completion={SortFilterHelper.SFEnumToUrlString(newSortArgs.completion)}" +
+                $"&crossover={SortFilterHelper.SFEnumToUrlString(newSortArgs.crossover)}" +
+                $"&sort={SortFilterHelper.SFEnumToUrlString(newSortArgs.sort)}" +
+                $"&dateFrom={newSortArgs.dateFrom}&dateTo={newSortArgs.dateTo}" +
+                $"&wordsFrom={newSortArgs.wordsFrom}&wordsTo={newSortArgs.wordsTo}" +
+                $"&otherExcludedTags={newSortArgs.otherExcludedTags}" +
+                $"&otherIncludedTags={newSortArgs.otherIncludedTags}" +
+                $"&language={newSortArgs.language}" +
+                $"&searchWithinResults={newSortArgs.searchWithinResults}";
+
+            if (newSortArgs.ratingsInclude != RatingsOption.None)
+            {
+                newSortQuery += $"&ratingsInclude={SortFilterHelper.SFEnumToUrlString(newSortArgs.ratingsInclude)}";
+            }
+
+            if (newSortArgs.ratingsExclude.Count > 0)
+            {
+                foreach (RatingsOption arg in newSortArgs.ratingsExclude)
+                {
+                    if (arg != RatingsOption.None)
+                    {
+                        newSortQuery += $"&ratingsExclude={SortFilterHelper.SFEnumToUrlString(arg)}";
+                    }
+                }
+            }
+
+            if (newSortArgs.warningsInclude.Count > 0)
+            {
+                foreach (WarningsOption arg in newSortArgs.warningsInclude)
+                {
+                    if (arg != WarningsOption.None)
+                    {
+                        newSortQuery += $"&warningsInclude={SortFilterHelper.SFEnumToUrlString(arg)}";
+                    }
+                }
+            }
+
+            if (newSortArgs.warningsExclude.Count > 0)
+            {
+                foreach (WarningsOption arg in newSortArgs.warningsExclude)
+                {
+                    if (arg != WarningsOption.None)
+                    {
+                        newSortQuery += $"&warningsExclude={SortFilterHelper.SFEnumToUrlString(arg)}";
+                    }
+                }
+            }
+
+            if (newSortArgs.categoriesInclude.Count > 0)
+            {
+                foreach (CategoryOption arg in newSortArgs.categoriesInclude)
+                {
+                    if (arg != CategoryOption.None)
+                    {
+                        newSortQuery += $"&categoriesInclude={SortFilterHelper.SFEnumToUrlString(arg)}";
+                    }
+                }
+            }
+
+            if (newSortArgs.categoriesExclude.Count > 0)
+            {
+                foreach (CategoryOption arg in newSortArgs.categoriesExclude)
+                {
+                    if (arg != CategoryOption.None)
+                    {
+                        newSortQuery += $"&categoriesExclude={SortFilterHelper.SFEnumToUrlString(arg)}";
+                    }
+                }
+            }
+
+            return newSortQuery;
+        }
+
+        // Keep synced with strings in  ArchiveOfOurOwnAPI.GetAllFanficsOnPage.getBaseUrlForPageType
+        private string GetPageTypeForSearchType(SearchType searchType)
+        {
+            switch(searchType)
+            {
+                case SearchType.Tags:
+                    return "tagWorksPage";
+                default:
+                    return "workSearchResultsPage";
+            }
+        }
+
         private async Task<List<Work>> RunAPICall(string searchQuery, string sortQuery, int pageNumber)
         {
+            var pageType = GetPageTypeForSearchType(_currentSearchType);
+
             _currentSearchQuery = searchQuery;
             _currentSortQuery = sortQuery;
             _currentPageNumber = pageNumber;
 
-            _apiFunctionPath = $"GetAllFanficsOnPage?tagName={_currentSearchQuery}&pageNumber={_currentPageNumber}{_currentSortQuery}";
+            _apiFunctionPath = $"GetAllFanficsOnPage?pageType={pageType}&searchQuery={_currentSearchQuery}&pageNumber={_currentPageNumber}";
 
             try
             {

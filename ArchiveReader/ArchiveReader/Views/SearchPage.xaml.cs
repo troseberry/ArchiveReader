@@ -101,8 +101,8 @@ namespace ArchiveReader.Views
             }
         }
 
-
         /*
+        
         public SearchPage()
         {
             InitializeComponent();
@@ -303,15 +303,6 @@ namespace ArchiveReader.Views
         }
 
         */
-    }
-
-    public enum SearchType
-    {
-        Invalid,
-        Works,
-        Bookmarks,
-        People,
-        Tags
     }
 
     public struct TestSearch
